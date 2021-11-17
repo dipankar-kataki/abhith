@@ -18,7 +18,7 @@ class PaymentController extends Controller
     public function checkout(Request $request){
         $cart = []; $countCartItem=0;  $price = [];
         if(Auth::check()){
-            $cart = Cart::where('user_id',Auth::user()->id)->where('is_paid', 0)->get();
+            $cart = Cart::where('user_id',Auth::user()->id)->where('is_paid', 0)->where('is_remove_from_cart',0)->get();
             $countCartItem = Cart::where('user_id',Auth::user()->id)->where('is_paid', 0)->count();
             foreach($cart as $item){
                 $countPrice = Chapter::where('id', $item->chapter_id)->sum('price');

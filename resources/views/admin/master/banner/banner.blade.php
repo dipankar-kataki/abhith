@@ -1,8 +1,23 @@
 @extends('layout.admin.layoout.admin')
 
-@section('title','Banner')
+@section('title', 'Banner')
 
 @section('content')
+
+    <style>
+        table {
+            width: 100%;
+        }
+
+        .ten {
+            width: 10%
+        }
+
+        .twenty {
+            width: 20%;
+        }
+
+    </style>
 
     <div class="page-header">
         <h3 class="page-title">
@@ -22,7 +37,7 @@
 
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
-            <div class="card-body">
+            <div class="card-body" style="overflow-x: auto">
                 <h4 class="card-title">Banner List</h4>
                 </p>
                 <table class="table table-bordered">
@@ -30,7 +45,7 @@
                         <tr>
                             <th> # </th>
                             <th> Banner name </th>
-                            <th>Banner</th>
+                            <th> Banner </th>
                             <th> Status </th>
                             <th> Description </th>
                             <th> Action </th>
@@ -57,9 +72,14 @@
                                         </label>
                                     @endif
                                 </td>
-                                <td>{!! $item->description !!}</td>
                                 <td>
-                                    <a href="{{route('admin.edit.banner',['id'=>\Crypt::encrypt($item->id)])}}"  class="btn btn-gradient-primary btn-rounded btn-icon anchor_rounded">
+                                    {{-- {!! $item->description !!} --}}
+                                    {{-- {!! Illuminate\Support\Str::limit($item->description, 100, ' ...')!!} --}}
+                                    {!! Illuminate\Support\Str::limit(strip_tags($item->description), $limit = 50, $end = '...') !!}
+                                </td>
+                                <td>
+                                    <a href="{{ route('admin.edit.banner', ['id' => \Crypt::encrypt($item->id)]) }}"
+                                        class="btn btn-gradient-primary btn-rounded btn-icon anchor_rounded">
                                         <i class="mdi mdi-pencil-outline"></i>
                                     </a>
                                 </td>
@@ -95,8 +115,6 @@
                 }
             });
         });
-
-
     </script>
 
 

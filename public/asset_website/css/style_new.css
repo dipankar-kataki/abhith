@@ -77,3 +77,28 @@
 .dropdown-item:focus, .dropdown-item:hover{
     background: #fff;
 }
+
+.total1{
+    font-size: 1.5rem;
+}
+
+.view-chapters{
+    font-size: 1.2rem;
+}
+
+.enroll{
+    background-image: linear-gradient(to left, #076fef, #01b9f1);
+    padding: 10px 20px;
+    bottom: 10px;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.enroll:hover{
+    color: #fff;
+    background: #111;
+}
+
+#portfoliolist > .portfolio{
+    padding: 5px;
+}

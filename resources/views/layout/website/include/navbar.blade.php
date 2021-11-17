@@ -5,14 +5,14 @@
         </h1>
         <nav class="nav-menu d-none d-lg-block">
             <ul>
-                <li class="active"><a href="{{route('website.dashboard')}}">Home</a></li>
-                <li><a href="{{route('website.about')}}">About Us</a></li>
-                <li><a href="{{route('website.course')}}">Courses</a></li>
-                <li><a href="{{route('website.gallery')}}">Gallery</a></li>
-                <li><a href="{{route('website.blog')}}">Blogs</a></li>
-                <li><a href="{{route('website.knowledge.forum')}}">Knowledge Forum</a></li>
-                <li><a href="{{route('website.get.time.table')}}">Time Table</a></li>
-                <li><a href="{{route('website.contact')}}" class="about-view">Contact Us</a></li>
+                <li class="{{ Route::is('website.dashboard') ? 'active' : '' }}"><a href="{{route('website.dashboard')}}">Home</a></li>
+                <li class="{{ Route::is('website.about') ? 'active' : '' }}"><a href="{{route('website.about')}}">About Us</a></li>
+                <li class="{{ Route::is('website.course') || Route::is('website.course.details') ? 'active' : '' }}"><a href="{{route('website.course')}}">Courses</a></li>
+                <li class="{{ Route::is('website.gallery') ? 'active' : '' }}"><a href="{{route('website.gallery')}}">Gallery</a></li>
+                <li class="{{ Route::is('website.blog') || Route::is('website.blog.details') ? 'active' : '' }}"><a href="{{route('website.blog')}}">Blogs</a></li>
+                <li class="{{ Route::is('website.knowledge.forum') ? 'active' : '' }}"><a href="{{route('website.knowledge.forum')}}">Knowledge Forum</a></li>
+                <li class="{{ Route::is('website.get.time.table') ? 'active' : '' }}"><a href="{{route('website.get.time.table')}}">Time Table</a></li>
+                <li class="{{ Route::is('website.contact') ? 'active' : '' }}"><a href="{{route('website.contact')}}" class="about-view">Contact Us</a></li>
 
             </ul>
 

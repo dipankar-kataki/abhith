@@ -17,7 +17,7 @@ use App\Http\Controllers\admin\MultipleChoiceController;
 use App\Http\Controllers\website\CartController;
 use App\Http\Controllers\website\RazorpayPaymentController;
 use App\Http\Controllers\website\PaymentController;
-use App\Http\controllers\admin\TimeTableController;
+use App\Http\Controllers\admin\TimeTableController;
 
 /*
 |--------------------------------------------------------------------------
@@ -113,8 +113,9 @@ Route::prefix('payment')->group(function(){
     Route::post('verify-payment', [PaymentController::class, 'verifyPayment'])->name('payment.verify');
 });
 
+/* ------------------------------- Time table ------------------------------------ */
 Route::prefix('time-table')->group(function(){
-    Route::get('time-table', [TimeTableController::class, 'websiteViewTimeTable'])->name('website.get.time.table');
+    Route::get('', [TimeTableController::class, 'websiteViewTimeTable'])->name('website.get.time.table');
 });
 
 

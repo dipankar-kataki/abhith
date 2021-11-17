@@ -23,9 +23,14 @@
                     <div class="row">
                         <div class="col-md-4"><img class="rounded" src="{{ asset($Total_price->course_pic) }}" width="100%" alt=""></div>
                         <div class="col-md-8">
-                            <ul class="list-inline centered">
+                            <ul class="list-inline centered view-chapters">
+                                <li class="d-flex justify-content-between ">
+                                    <label for="styled-checkbox-1"><b>Chapter</b></label>
+                                    <span class="course-price"><b>Price</b></span>
+                                </li>
+                                <hr class="mt-0 mb-0">
                                 @foreach ($Total_price->priceList as $item)
-                                <li class="d-flex justify-content-between">
+                                <li class="d-flex justify-content-between ">
                                     <label for="styled-checkbox-1">{{$item->name}}</label>
                                     <span class="course-price"><i class="fa fa-inr" aria-hidden="true"></i>{{$item->price}}</span>
                                 </li>

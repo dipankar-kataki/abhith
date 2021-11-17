@@ -16,41 +16,43 @@
             <div class="card-body">
                 {{-- <h4 class="card-title">Subjects List</h4> --}}
                 </p>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th> # </th>
-                            <th> Post Id </th>
-                            <th>Number Of Reports</th>
-                            <th> Action </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse ($reportedPosts as $key => $item)
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
                             <tr>
-                                <td> {{ $key + 1 }} </td>
-                                <td id="postId">{{ $item->knowledge_forum_post_id }}</td>
-                                <td>{{ $item->report_count }}</td>
-                                <td>
-                                    <div class="dropdown">
-                                        <a href="#" type="button"  data-toggle="dropdown" style="font-size:18px;color:black;"> <i class="mdi mdi-menu"></i></a>
-                                        <div class="dropdown-menu">
-                                            <a class="dropdown-item move-to-trash" href="#" style="font-size:15px;color:black;">Move To Trash</a>
-                                            {{-- <a class="dropdown-item" href="#" style="font-size:15px;">Permanent Delete</a> --}}
-                                        </div>
-                                    </div> 
-                                </td>
+                                <th> # </th>
+                                <th> Post Name </th>
+                                <th>Number Of Reports</th>
+                                <th> Action </th>
                             </tr>
-                        @empty 
-                            <tr>
-                                <td colspan="6">
-                                    <div class="text-center">No Reported Post's Found.</div>
-                                </td>
-                            </tr>
-                        @endforelse
-
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @forelse ($reportedPosts as $key => $item)
+                                <tr>
+                                    <td> {{ $key + 1 }} </td>
+                                    <td id="postId">{{ $item->knowledgeForumPost->question }}</td>
+                                    <td>{{ $item->report_count }}</td>
+                                    <td>
+                                        <div class="dropdown">
+                                            <a href="#" type="button"  data-toggle="dropdown" style="font-size:18px;color:black;"> <i class="mdi mdi-menu"></i></a>
+                                            <div class="dropdown-menu">
+                                                <a class="dropdown-item move-to-trash" href="#" style="font-size:15px;color:black;">Move To Trash</a>
+                                                {{-- <a class="dropdown-item" href="#" style="font-size:15px;">Permanent Delete</a> --}}
+                                            </div>
+                                        </div> 
+                                    </td>
+                                </tr>
+                            @empty 
+                                <tr>
+                                    <td colspan="6">
+                                        <div class="text-center">No Reported Post's Found.</div>
+                                    </td>
+                                </tr>
+                            @endforelse
+    
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

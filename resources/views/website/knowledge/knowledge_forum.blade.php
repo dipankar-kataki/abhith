@@ -102,7 +102,7 @@
                                     @php $encrypted_id = Crypt::encryptString($top_post->id)@endphp
                                     <li>
                                         <p class="small-text-heading">{{ $top_post->created_at->diffForHumans() }},
-                                            &nbsp;Poted by: {{ $top_post->user->firstname }}
+                                            &nbsp;Posted by: {{ $top_post->user->firstname }}
                                             {{ $top_post->user->lastname }}</p>
                                         <a href="{{ route('website.knowledge.details.post', ['id' => $encrypted_id]) }}"
                                             target="_blank" class="small-heading-black">{{ $top_post->question }}</a>

@@ -52,6 +52,46 @@ class CourseController extends Controller
                 $video = $request->video;
                 $imgFile = '';
                 $videoFile = '';
+                $checkCourseName = Course::where('name','like','%'.$request->name.'%')->exists();
+                if( $checkCourseName == true){
+                    return response()->json(['error' => 'Oops! Same Course Name Exists', 'status' => 2]);
+                }else{
+                    
+                    if (isset($document) && !empty($document)) {
+                        $new_img_name = date('d-m-Y-H-i-s') . '_' . $document->getClientOriginalName();
+                        // $new_name = '/images/'.$image.'_'.date('d-m-Y-H-i-s');
+                        $document->move(public_path('/files/course/'), $new_img_name);
+                        $imgFile = 'files/course/' . $new_img_name;
+                    }else if(isset($video) && !empty($video)){
+                        $new_video_name = date('d-m-Y-H-i-s') . '_' . $video->getClientOriginalName();
+                        // $new_name = '/images/'.$image.'_'.date('d-m-Y-H-i-s');
+                        $video->move(public_path('/files/course/'), $new_video_name);
+                        $videoFile = 'files/course/' . $new_video_name;
+                    }else{
+                        return response()->json(["status"=>1,'error'=>'Image or Video is required']);
+                    }
+
+                    Course::create([
+                        'name' => $request->name,
+                        'subject_id' => $request->subject_id,
+                        'course_pic' => $imgFile,
+                        'course_video' => $videoFile,
+                        'durations' => $request->duration,
+                        'publish_date' => Carbon::parse($request->publish_date.$request->publish_time)->format('Y-m-d H:i:s'),
+                        'time' => Carbon::parse($request->publish_time)->format('H:i:s'),
+                        'description' =>  \ConsoleTVs\Profanity\Builder::blocker($request->data, BadWords::badWordsReplace)->strictClean(false)->filter(),
+                    ]);
+                    return response()->json(['status'=>1]);
+                }
+            }
+        } else {
+
+            $checkCourseName = Course::where('name','like','%'.$request->name.'%')->exists();
+            if( $checkCourseName == true){
+                return response()->json(['error' => 'Oops! Same Course Name Exists', 'status' => 2]);
+            }else{
+                $document = $request->pic;
+                $video = $request->video;
                 if (isset($document) && !empty($document)) {
                     $new_img_name = date('d-m-Y-H-i-s') . '_' . $document->getClientOriginalName();
                     // $new_name = '/images/'.$image.'_'.date('d-m-Y-H-i-s');
@@ -63,7 +103,7 @@ class CourseController extends Controller
                     $video->move(public_path('/files/course/'), $new_video_name);
                     $videoFile = 'files/course/' . $new_video_name;
                 }else{
-                    return response()->json(["status"=>1,'error'=>'Image or Video is required']);
+                    return response()->json(["status"=>2,'error'=>'Image or Video is required']);
                 }
 
                 Course::create([
@@ -75,38 +115,10 @@ class CourseController extends Controller
                     'publish_date' => Carbon::parse($request->publish_date.$request->publish_time)->format('Y-m-d H:i:s'),
                     'time' => Carbon::parse($request->publish_time)->format('H:i:s'),
                     'description' =>  \ConsoleTVs\Profanity\Builder::blocker($request->data, BadWords::badWordsReplace)->strictClean(false)->filter(),
+
                 ]);
                 return response()->json(['status'=>1]);
             }
-        } else {
-            $document = $request->pic;
-            $video = $request->video;
-            if (isset($document) && !empty($document)) {
-                $new_img_name = date('d-m-Y-H-i-s') . '_' . $document->getClientOriginalName();
-                // $new_name = '/images/'.$image.'_'.date('d-m-Y-H-i-s');
-                $document->move(public_path('/files/course/'), $new_img_name);
-                $imgFile = 'files/course/' . $new_img_name;
-            }else if(isset($video) && !empty($video)){
-                $new_video_name = date('d-m-Y-H-i-s') . '_' . $video->getClientOriginalName();
-                // $new_name = '/images/'.$image.'_'.date('d-m-Y-H-i-s');
-                $video->move(public_path('/files/course/'), $new_video_name);
-                $videoFile = 'files/course/' . $new_video_name;
-            }else{
-                return response()->json(["status"=>2,'error'=>'Image or Video is required']);
-            }
-
-            Course::create([
-                'name' => $request->name,
-                'subject_id' => $request->subject_id,
-                'course_pic' => $imgFile,
-                'course_video' => $videoFile,
-                'durations' => $request->duration,
-                'publish_date' => Carbon::parse($request->publish_date.$request->publish_time)->format('Y-m-d H:i:s'),
-                'time' => Carbon::parse($request->publish_time)->format('H:i:s'),
-                'description' =>  \ConsoleTVs\Profanity\Builder::blocker($request->data, BadWords::badWordsReplace)->strictClean(false)->filter(),
-
-            ]);
-            return response()->json(['status'=>1]);
         }
     }
 

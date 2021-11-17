@@ -27,6 +27,12 @@
             background: linear-gradient(to right, #da8cff, #9a55ff);
         }
     </style>
+
+    {{-- ============================ Added by Alok ============================ --}}
+    <link href="{{asset('asset_website/css/style_new.css')}}" rel="stylesheet">
+    <link href="{{asset('asset_website/css/responsive_new.css')}}" rel="stylesheet">
+    {{-- ===================================================================== --}}
+    
     @yield('head')
 </head>
 

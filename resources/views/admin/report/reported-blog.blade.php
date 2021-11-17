@@ -20,7 +20,7 @@
                     <thead>
                         <tr>
                             <th> # </th>
-                            <th> Blog Id </th>
+                            <th> Blog Name </th>
                             <th>Number Of Reports</th>
                             <th> Action </th>
                         </tr>
@@ -29,7 +29,7 @@
                         @forelse ($reportedBlogs as $key => $item)
                             <tr>
                                 <td> {{ $key + 1 }} </td>
-                                <td>{{ $item->blogs_id }}</td>
+                                <td>{{ $item->blogs->name }}</td>
                                 <td>{{ $item->report_count }}</td>
                                 <td>
                                     @if ($item->is_activate == 1)

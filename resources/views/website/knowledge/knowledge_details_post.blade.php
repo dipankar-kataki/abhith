@@ -58,7 +58,7 @@
                             <div class="answer-describtion">
                                 <h4 class="small-heading-black">Q: {{$knowledge_post->question}}</h4>
                                
-                                <p class="text-justify">{{$knowledge_post->description}}</p>
+                                <p class="text-justify">{!! $knowledge_post->description !!}</p>
                                 <a href="{{$knowledge_post->links}}" class="post-link">{{$knowledge_post->links}}</a>
                                 <div class="answer-btn-box">
                                     <ul class="list-inline answer-btn-list">

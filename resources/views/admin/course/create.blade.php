@@ -225,10 +225,14 @@ $subjects = Subject::where('is_activate', Activation::Activate)
 
                         },
                         200: function(data) {
+
+                            console.log(data)
                             if (data.status == 2) {
-                                toastr["success"](data.error);
+                                toastr["error"](data.error);
                                 $('#addCourseSubmitButton').text('Submit');
                                 $('#addCourseSubmitButton').attr('disabled', false);
+                                document.getElementById('course_video').value = '';
+                                pond.removeFile();
 
                             } else {
                                 toastr.success('Publish Successfull');
@@ -241,7 +245,9 @@ $subjects = Subject::where('is_activate', Activation::Activate)
                         500: function() {
                             alert('500 someting went wrong');
                             $('#addCourseSubmitButton').text('Submit');
-                                $('#addCourseSubmitButton').attr('disabled', false);
+                            $('#addCourseSubmitButton').attr('disabled', false);
+                            document.getElementById('course_video').value = '';
+                            pond.removeFile();
                         }
                     }
                 });

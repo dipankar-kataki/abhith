@@ -218,6 +218,7 @@
                     success:function(result){
                         toastr.success(result.success);
                         $('#ReportBlogModal').modal('hide');
+                        location.reload(true);
                     },
                     error:function(xhr, status, error){
                         if(xhr.status == 500 || xhr.status == 422){

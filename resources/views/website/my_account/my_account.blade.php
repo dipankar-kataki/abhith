@@ -79,11 +79,11 @@
                                 @if($user_details != null)
                                     <div class="form-group col-lg-6 pr10">
                                         <label>First Name</label>
-                                        <input type="text" class="form-control" name="fname" placeholder="Enter First Name" id="firstname" pattern="^([a-zA-Z]+)$" title="Please Enter Letters only." value="{{Auth::user()->firstname}}" required>
+                                        <input type="text" class="form-control" name="fname" placeholder="Enter First Name" id="firstname" pattern="^([a-zA-Z]+)\s?([a-zA-z]+)" title="Please Enter Letters only." value="{{Auth::user()->firstname}}" required>
                                     </div>
                                     <div class="form-group col-lg-6 pl10">
                                         <label>Last Name</label>
-                                        <input type="text" class="form-control" name="lname" placeholder="Enter Last Name" id="lastname" pattern="^([a-zA-Z]+)$" title="Please Enter Letters only." value="{{Auth::user()->lastname}}" required>
+                                        <input type="text" class="form-control" name="lname" placeholder="Enter Last Name" id="lastname" pattern="^([a-zA-Z]+)\s?([a-zA-z]+)" title="Please Enter Letters only." value="{{Auth::user()->lastname}}" required>
                                     </div>
                                     <div class="form-group col-lg-6 pr10">
                                         <label>Email ID</label>
@@ -109,11 +109,11 @@
                                 @else
                                     <div class="form-group col-lg-6 pr10">
                                         <label>First Name</label>
-                                        <input type="text" class="form-control" name="fname" placeholder="Enter First Name" id="firstname" pattern="^([a-zA-Z]+)$" title="Please Enter Letters only." value="{{Auth::user()->firstname}}" required>
+                                        <input type="text" class="form-control" name="fname" placeholder="Enter First Name" id="firstname" pattern="^([a-zA-Z]+)\s?([a-zA-z]+)" title="Please Enter Letters only." value="{{Auth::user()->firstname}}" required>
                                     </div>
                                     <div class="form-group col-lg-6 pl10">
                                         <label>Last Name</label>
-                                        <input type="text" class="form-control" name="lname" placeholder="Enter Last Name" id="lastname" pattern="^([a-zA-Z]+)$" title="Please Enter Letters only." value="{{Auth::user()->lastname}}" required>
+                                        <input type="text" class="form-control" name="lname" placeholder="Enter Last Name" id="lastname" pattern="^([a-zA-Z]+)\s?([a-zA-z]+)" title="Please Enter Letters only." value="{{Auth::user()->lastname}}" required>
                                     </div>
                                     <div class="form-group col-lg-6 pr10">
                                         <label>Email ID</label>

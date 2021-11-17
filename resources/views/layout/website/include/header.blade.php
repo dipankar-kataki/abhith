@@ -2,7 +2,7 @@
     use App\Models\Cart;
     use Illuminate\Support\Facades\Auth;
     if(Auth::check()){
-        $cart_items = Cart::where('user_id', Auth::user()->id)->count();
+        $cart_items = Cart::where('user_id',Auth::user()->id)->where('is_paid', 0)->where('is_remove_from_cart', 0)->count();
     }
 @endphp
 
