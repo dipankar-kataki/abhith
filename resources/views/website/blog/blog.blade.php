@@ -73,6 +73,7 @@
                                             </div>
                                             <div>
                                                 <span class="mb0">- Anonymous</span>
+                                                <h6 class="mt-2 ml-2">Read More</h6>
                                             </div>
                                         </div>
                                     </div>
