@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-<div class="col-12 grid-margin stretch-card">
+<div class="col-12 grid-margin">
     <div class="card">
         <div class="card-body">
             <h4 class="card-title">Create Chapter </h4>
@@ -30,6 +30,62 @@
         </div>
     </div>
 </div>
+
+<div class="col-12 grid-margin">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Modify Chapter <span style="float:right;margin-right:10px;"> {{$chapters->links()}}</span></h4>
+            <form id="updateChapter">
+                @csrf
+                <input type="hidden" name="course_id"  id="course_id" value="{{\Crypt::encrypt($course_id)}}">
+                <table class="table table-bordered footable footable-1 footable-paging footable-paging-center breakpoint-lg" id="dynamic_field" style="">
+                    <tbody>
+                        <tr>
+                            <th>#</th>
+                            <th>Chapter Name</th>
+                            <th>Price</th>
+                            @if (!$chapters->isEmpty())
+                                <th>
+                                    <button type="button" class="btn btn-success editChapterBtn">Edit</button>
+                                    <button type="button" class="btn btn-warning cancelEditChapterBtn" style="display:none;">Cancel Edit</button>
+                                </th>
+                            @endif
+                        </tr>
+                        @forelse ($chapters as $key => $item)
+                            <tr>
+                                <td>{{$chapters->firstItem() + $key}}</td>
+                                <td class="footable-first-visible" style="width: 40%; display: table-cell;">
+                                    <input type="text" name="name"  placeholder="Enter Chapter" class="form-control name_list chapterName" id="cname_{{$item->id}}" value="{{$item->name}}"  required>
+                                </td>
+                                <td class="footable-first-visible" style="width: 40%; display: table-cell;">
+                                    <input type="text" name="price"  placeholder="Enter Price" class="form-control name_list chapterPrice" id="cprice_{{$item->id}}" pattern="\d+(\.)?(\d)?" title="Value should be a format of price. E.g 22 or 22.9" value="{{$item->price}}" required>
+                                </td>
+                                <td class="footable-last-visible" style="display: table-cell;">
+                                    <button type="button" name="add"  class="btn btn-success updateChapterBtn" data-id="{{$item->id}}" data-name="" data-price="{{$item->price}}" style="display:none;">Update</button>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="3">
+                                    <div class="text-center">
+                                        <h3>No Chapter's Found</h3>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforelse
+                        
+                    </tbody>
+                    <tfoot>
+                        
+                    </tfoot>
+                </table>
+                
+
+                {{-- <button class="btn btn-primary mt-3">Submit</button> --}}
+            </form>
+        </div>
+    </div>
+</div>
 @endsection
 
 @section('scripts')
@@ -44,7 +100,80 @@
         var button_id = $(this).attr("id");
         $('#row' + button_id + '').remove();
     });
+
+
+    /**********************************  Update Chapter Details *********************************/
+
+    $('.chapterName').attr('disabled',true);
+    $('.chapterPrice').attr('disabled',true);
+
+    $('.editChapterBtn').on('click',function(e){
+        e.preventDefault();
+        $('.editChapterBtn').css('display','none');
+        $('.cancelEditChapterBtn').css('display','block');
+        $('.updateChapterBtn').css('display','block');
+        $('.chapterName').attr('disabled',false);
+        $('.chapterPrice').attr('disabled',false);
+    });
+
+    $('.cancelEditChapterBtn').on('click',function(e){
+        e.preventDefault();
+        $('.cancelEditChapterBtn').css('display','none');
+        $('.editChapterBtn').css('display','block');
+        $('.updateChapterBtn').css('display','none');
+        $('.chapterName').attr('disabled',true);
+        $('.chapterPrice').attr('disabled',true);
+    });
+
+   
+
+    $('.updateChapterBtn').on('click', function(e){
+        e.preventDefault();
+        let id = $(this).data('id');
+        let cName = $('#cname_'+id).val();
+        let cPrice = $('#cprice_'+id).val();
+        let regex = new RegExp(" \d+(\.)?(\d)?");
+        if(cName.length == 0){
+            toastr.error('Chapter name is required');
+        }else if(cPrice.length == 0){
+            toastr.error('Chapter price is required');
+        }else if(/^(\d+)(\.)?(\d+)?$/.test(cPrice) == false){
+            toastr.error('Chapter price should be natural number or a decimal number');
+        }else{
+            $.ajax({
+                url:"{{route('admin.edit.chapter')}}",
+                type:'POST',
+                data:{
+                    'course_id' : $('#course_id').val(),
+                    'itemId' : id,
+                    'chapterName' : cName,
+                    'chapterPrice' : cPrice,
+                    "_token": "{{ csrf_token() }}",
+                },
+                success:function(data){
+                    console.log(data.message)
+                    toastr.success(data.message);
+                    location.reload(true);
+                },
+                error:function(xhr,status,error){
+                    if(xhr.status == 500 || xhr.status == 422){
+                        toastr.error('Oops! Something went wrong while updating.');
+                    }
+                }
+            });
+        }
+       
+        // alert($(this).data('id'));
+    })
+      
+   
+
+
+
+
+
 </script>
+
 
 @if (session('success'))
     <script>

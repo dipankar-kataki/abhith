@@ -51,6 +51,7 @@ Route::prefix('chapter')->group(function () {
     Route::get('{id}',[ChapterController::class,'index'])->name('admin.get.chapter');
     // Route::view('create', 'admin.course.create')->name('admin.create.course');
     Route::post('creating',[ChapterController::class,'create'])->name('admin.creating.chapter');
+    Route::post('editChapter',[ChapterController::class,'editChapter'])->name('admin.edit.chapter');
 
 });
 
