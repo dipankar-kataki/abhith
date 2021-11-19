@@ -55,6 +55,9 @@
                         </tbody>
                     </table>
                 </div>
+                <div style="float:right;margin-top:10px;">
+                    {{  $details->links() }}
+              </div>
             </div>
         </div>
     </div>

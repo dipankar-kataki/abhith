@@ -9,7 +9,7 @@ use App\Models\Order;
 class EnrolledController extends Controller
 {
     public function getEnrolledStudents(){
-        $stu_details = Order::with('course','chapter', 'user')->get();
+        $stu_details = Order::with('course','chapter', 'user')->orderBy('created_at','DESC')->simplePaginate('10');
         return view('admin.enrolled.students')->with('details', $stu_details);
     }
 }
