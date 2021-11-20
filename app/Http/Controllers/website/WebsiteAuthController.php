@@ -73,10 +73,10 @@ class WebsiteAuthController extends Controller
         ]);
        
         if (Auth::attempt(['email' => $request->email,  'password' => $request->password, 'role_id' => Role::User, 'is_activate'=> Activation::Activate ])) {
-            if($request->current_route == $request->current_route){
-                return redirect($request->current_route);
-            }else{
+            if( ($request->current_route == $request->current_route) && ($request->current_route == null) ){
                 return redirect()->route('website.dashboard');
+            }else{
+                return redirect($request->current_route);
             }   
         } else {
             return redirect()->back()->withErrors(['Credentials doesn\'t match with our record'])->withInput($request->input());
