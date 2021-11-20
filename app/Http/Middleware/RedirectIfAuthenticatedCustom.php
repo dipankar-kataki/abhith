@@ -18,10 +18,11 @@ class RedirectIfAuthenticatedCustom
     public function handle(Request $request, Closure $next,  $guard = null)
     {
         // return $next($request);
-        if (Auth::guard($guard)->check()) {
-            return redirect('admin/dashboard');
+        if (Auth::guard($guard)->check() ) {
+            if(Auth::user()->role_id == 1){
+                return redirect('admin/dashboard');
+            }
         }
-
         return $next($request);
     }
 }
