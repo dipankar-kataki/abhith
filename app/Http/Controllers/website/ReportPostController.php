@@ -33,12 +33,14 @@ class ReportPostController extends Controller
     }
 
     public function moveToTrash(Request $request){
-        $postId = $request->postId;
-
+        $postId = $request->post_id;
+        $status = $request->active;
         KnowledgeForumPost::where('id',$postId)->update([
-            'is_activate' => 0
+            'is_activate' =>  $status
         ]);
-        ReportPost::where('knowledge_forum_post_id',$postId)->delete();
-        return response()->json(['success' => 'Post move to trash successfully']);
+        ReportPost::where('knowledge_forum_post_id',$postId)->update([
+            'is_activate' =>  $status
+        ]);;
+        return response()->json(['success' => 'Post status updated successfully']);
     }
 }

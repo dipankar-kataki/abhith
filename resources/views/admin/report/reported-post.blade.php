@@ -33,13 +33,17 @@
                                     <td id="postId">{{ $item->knowledgeForumPost->question }}</td>
                                     <td>{{ $item->report_count }}</td>
                                     <td>
-                                        <div class="dropdown">
-                                            <a href="#" type="button"  data-toggle="dropdown" style="font-size:18px;color:black;"> <i class="mdi mdi-menu"></i></a>
-                                            <div class="dropdown-menu">
-                                                <a class="dropdown-item move-to-trash" href="#" style="font-size:15px;color:black;">Move To Trash</a>
-                                                {{-- <a class="dropdown-item" href="#" style="font-size:15px;">Permanent Delete</a> --}}
-                                            </div>
-                                        </div> 
+                                        @if ($item->is_activate == 1)
+                                            <label class="switch">
+                                                <input type="checkbox" id="postStatusUpdate" data-id="{{ $item->knowledge_forum_post_id }}" checked>
+                                                <span class="slider round"></span>
+                                            </label>
+                                        @else
+                                            <label class="switch">
+                                                <input type="checkbox" id="postStatusUpdate" data-id="{{ $item->knowledge_forum_post_id }}">
+                                                <span class="slider round"></span>
+                                            </label>
+                                        @endif
                                     </td>
                                 </tr>
                             @empty 
@@ -62,20 +66,21 @@
 {{-- scripts --}}
 @section('scripts')
     <script>
-        $('.move-to-trash').on('click',function(e){
-            e.preventDefault();
-            let postId = $('#postId').text();
+        $(document.body).on('change', '#postStatusUpdate', function() {
+            let status = $(this).prop('checked') == true ? 1 : 0;
+            let post_id = $(this).data('id');
+            let formData = {
+                'post_id': post_id,
+                'active': status
+            }
             $.ajax({
-                url:"{{route('website.remove.reported.post')}}",
-                type:'POST',
-                data:{ '_token': '{{ csrf_token() }}','postId' : postId},
-                success:function(result){
-                    if(result.success){
-                        toastr.success(result.success);
-                        location.reload();
-                    }else{
-                        toastr.error(result.error);
-                    }
+                type: "post",
+
+                url: "{{route('website.remove.reported.post') }}",
+                data: formData,
+
+                success: function(result) {
+                    toastr.success(result.success)
                 },
                 error:function(xhr, status, error){
                     if(xhr.status == 500 || xhr.status == 422){
