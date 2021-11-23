@@ -5,10 +5,23 @@
 @section('head')
 <style>
     .sidebar {
-            position: sticky;
-            top: 150px;
-        }
+        position: sticky;
+        top: 150px;
+    }
+    @import url("https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css");
+    table{
+        border: 1px solid #f3f3f3;
+        border-radius: 10px;
+        box-shadow: 0px 5px 5px #efecec;
+    }
+    th{
+        border-top:0px !important;
+    }
+    #purchase_history_table_filter{
+        margin-top:-40px;
+    }
 </style>
+
 @endsection
 
 @section('content')
@@ -322,11 +335,37 @@
                                 <h4 class="small-heading-black">Purchase History</h4>
                             </div>
                             <div class="col-lg-12">
-                                <ul class="list-inline cart-course-list1" style="border:none;">
-                                    <div id="purchaseHistory">
-                                        @include('website.my_account.purchase_history')
-                                    </div>
-                                </ul>
+                                <table id="purchase_history_table" class="table table-striped">
+                                    @if(!$purchase_history->isEmpty())
+                                    <thead>
+                                        <tr>
+                                            <th>Sl No.</th>
+                                            <th>Course Name</th>
+                                            <th>Chapter Name</th>
+                                            <th>Price</th>
+                                            <th>Purchase Date</th>
+                                        </tr>
+                                    </thead>
+                                    @endif
+                                    <tbody>
+                                        @forelse ($purchase_history as $key =>  $item)
+                                            <tr>
+                                                <td>{{$key + 1}}</td>
+                                                <td>{{$item->course->name}}</td>
+                                                <td>{{$item->chapter->name}}</td>
+                                                <td>{{$item->chapter->price}}</td>
+                                                <td>{{$item->updated_at->diffForHumans() }}</td>
+                                            </tr>
+                                        @empty
+                                            <tr>
+                                                <div class="text-center">
+                                                    <p>Oops! No items purchased yet.</p>
+                                                    <div class="shipping-div text-center"><a href="{{route('website.course')}}" class="shipping-btn">Continue shoping</a></div>
+                                                </div>
+                                            </tr>
+                                        @endforelse
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -508,38 +547,35 @@
             }
         });
 
-        /*******************************  Infinite Scroll Purchase History***************************************/
+        /*******************************  Purchase History***************************************/
+        $(document).ready( function () {
+            $('#purchase_history_table').DataTable({
+                "processing": true,
+                dom: 'Bfrtip',
+                buttons: [ 'excel', 'pdf', 'print'
+                    // {
+                    //     extend:'pdfHtml5',
+                    //     title:'Purchase History',
+                    //     orientation:'landscape',
+                    //     header:true,
 
-        function loadMorePurchaseHistory(page) {
-            let html = '<div style="position: absolute;left: 34%;"> <i class="fa fa-check-circle-o" aria-hidden="true" style="color:green;font-size:22px;"></i>&nbsp; You are all caught up. </div>';
-            $.ajax({
-                    url: '?page=' + page,
-                    type: 'get',
-                    beforeSend: function() {
-                        $('.ajax-loading').show();
-                    }
-                })
-                .done(function(data) {
-                    if (data.purchase_history == '') {
-                        $('.ajax-loading').html(html);
-                        return;
-                    } else {
-                        $('.ajax-loading').hide();
-                        $('#purchaseHistory').append(data.purchase_history);
-                    }
+                    //     customize:function(doc){
+                    //         let colCount = new Array();
+                    //         $('#purchase_history_table').find('tbody tr:first-child td').each(function(){
+                    //             if($(this).attr('colspan')){
+                    //                 for(let i=1;i<=$(this).attr('colspan'); i++){
+                    //                     colCount.push('*');
+                    //                 }
+                    //             }else{
+                    //                 colCount.push('*');
+                    //             }
+                    //         });
+                    //         doc.content[1].table.widths = colCount;
+                    //     }
 
-                })
-                .fail(function(jqXHR, ajaxOptions, thrownError) {
-                    toastr.error('Oops!, Something went wrong');
-                })
-        }
-
-        let page = 1;
-        $(window).scroll(function() {
-            if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
-                page++;
-                loadMorePurchaseHistory(page);
-            }
+                    // }
+                ]
+            });
         });
     </script>
 @endsection
