@@ -338,18 +338,18 @@
                                 <table id="purchase_history_table" class="table table-striped">
                                     @if(!$purchase_history->isEmpty())
                                     <thead>
-                                        <tr>
+                                        <tr class="text-center">
                                             <th>Sl No.</th>
                                             <th>Course Name</th>
                                             <th>Chapter Name</th>
-                                            <th>Price</th>
+                                            <th>Price ( <i class="fa fa-inr" aria-hidden="true" style="color:green;"></i> )</th>
                                             <th>Purchase Date</th>
                                         </tr>
                                     </thead>
                                     @endif
                                     <tbody>
                                         @forelse ($purchase_history as $key =>  $item)
-                                            <tr>
+                                            <tr class="text-center">
                                                 <td>{{$key + 1}}</td>
                                                 <td>{{$item->course->name}}</td>
                                                 <td>{{$item->chapter->name}}</td>
