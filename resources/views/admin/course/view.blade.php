@@ -15,13 +15,12 @@
         <div class="card">
             <div class="card-body">
                 <div class="d-flex justify-content-between">
-                    <h3 class="mb-4">{{$Total_price->name}}</h3>
-                    <h3> &#8377;{{$final_price}}/- </h3>
+                    <h3 class="mb-4 ml-3">Course Name: {{$Total_price->name}}</h3>
 
                 </div>
                 <div class="col-md-12">
                     <div class="row">
-                        <div class="col-md-4"><img class="rounded" src="{{ asset($Total_price->course_pic) }}" width="100%" alt=""></div>
+                        <div class="col-md-4"><img class="rounded mt-2" src="{{ asset($Total_price->course_pic) }}" width="100%" alt=""></div>
                         <div class="col-md-8">
                             <ul class="list-inline centered view-chapters">
                                 <li class="d-flex justify-content-between ">
@@ -35,6 +34,10 @@
                                     <span class="course-price"><i class="fa fa-inr" aria-hidden="true"></i>{{$item->price}}</span>
                                 </li>
                                 @endforeach
+                                <hr>
+                                <span style="font-size:20px;font-weight:bold;">Total Amount</span>
+                                <h3 style="float:right;"> <span style="color:green;">&#8377;</span> &nbsp;{{$final_price}}/- </h3>
+
                                 {{-- <li class="d-flex justify-content-between">
                                     <label for="styled-checkbox-1">Aldehydes, Ketones and Carboxylic Acids</label>
                                     <span class="course-price"><i class="fa fa-inr" aria-hidden="true"></i>500</span>

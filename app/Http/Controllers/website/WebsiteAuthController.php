@@ -81,8 +81,6 @@ class WebsiteAuthController extends Controller
         } else {
             return redirect()->back()->withErrors(['Credentials doesn\'t match with our record'])->withInput($request->input());
         }
-
-
     }
 
     public function logout(Request $request){

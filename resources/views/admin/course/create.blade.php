@@ -34,13 +34,13 @@ $subjects = Subject::where('is_activate', Activation::Activate)
                 <form id="createCourse" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="exampleInputName1">Name</label>
-                        <input type="text" class="form-control" name="name" placeholder="Name">
+                        <input type="text" class="form-control" name="name" placeholder="Name" required>
                         <span class="text-danger" id="name_error"></span>
                     </div>
 
                     <div class="form-group">
                         <label for="exampleSelectGender">Subjects</label>
-                        <select class="form-control" name="subject_id">
+                        <select class="form-control" name="subject_id" required>
                             <option value="" disabled selected>-- Select Subject --</option>
                             @foreach ($subjects as $item)
                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -68,9 +68,23 @@ $subjects = Subject::where('is_activate', Activation::Activate)
                         <span class="text-danger" id="pic_error"></span>
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputName1">Duration</label>
-                        <input type="text" class="form-control" name="duration" placeholder="Enter Duration">
-                        <span class="text-danger" id="duration_error"></span>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <label for="exampleInputName1">Duration </label>
+                                <input type="text" class="form-control" name="duration" placeholder="Enter Duration" pattern="^\d+$" title="Enter numbers only" required>
+                                <span class="text-danger" id="duration_error"></span>
+                            </div>
+                            <div class="col-md-4">
+                                <label for="exampleInputName1">Duration Type </label>
+                                <select name="duration_type" id="duration_type" class="form-control" required> 
+                                    <option  disabled selected>-- Select --</option>
+                                    <option value="Days">Days</option>
+                                    <option value="Hours">Hours</option>
+                                    <option value="Weeks">Weeks</option>
+                                    <option value="Months">Months</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputCity1">Publish Date</label>
@@ -198,10 +212,12 @@ $subjects = Subject::where('is_activate', Activation::Activate)
 
             if( (pondFiles.length == 0) && (document.getElementById('course_video').value == '')){
                 toastr.error('Image or Video must be selected from the file upload dropdown');
-            }
-            else{
+            }else if($('#duration_type').val() == null){
+                toastr.error('Duration type is required');
+            }else{
                 $('#addCourseSubmitButton').text('Please wait');
                 $('#addCourseSubmitButton').attr('disabled', true);
+
                 $.ajax({
 
                     type: "POST",

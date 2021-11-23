@@ -23,6 +23,7 @@ class CourseController extends Controller
 
     protected function create(Request $request)
     {
+
         # code...
         $this->validate($request,[
             'name' => 'required',
@@ -52,9 +53,9 @@ class CourseController extends Controller
                 $video = $request->video;
                 $imgFile = '';
                 $videoFile = '';
-                $checkCourseName = Course::where('name','like','%'.$request->name.'%')->exists();
+                $checkCourseName = Course::where('name','like','%'.$request->name.'%')->where('subject_id',$request->subject_id)->exists();
                 if( $checkCourseName == true){
-                    return response()->json(['error' => 'Oops! Same Course Name Exists', 'status' => 2]);
+                    return response()->json(['error' => 'Oops! Chapter name already exists under this course name', 'status' => 2]);
                 }else{
                     
                     if (isset($document) && !empty($document)) {
@@ -76,7 +77,7 @@ class CourseController extends Controller
                         'subject_id' => $request->subject_id,
                         'course_pic' => $imgFile,
                         'course_video' => $videoFile,
-                        'durations' => $request->duration,
+                        'durations' => $request->duration.' '.$request->duration_type,
                         'publish_date' => Carbon::parse($request->publish_date.$request->publish_time)->format('Y-m-d H:i:s'),
                         'time' => Carbon::parse($request->publish_time)->format('H:i:s'),
                         'description' =>  \ConsoleTVs\Profanity\Builder::blocker($request->data, BadWords::badWordsReplace)->strictClean(false)->filter(),
@@ -86,9 +87,9 @@ class CourseController extends Controller
             }
         } else {
 
-            $checkCourseName = Course::where('name','like','%'.$request->name.'%')->exists();
+            $checkCourseName = Course::where('name','like','%'.$request->name.'%')->where('subject_id',$request->subject_id)->exists();
             if( $checkCourseName == true){
-                return response()->json(['error' => 'Oops! Same Course Name Exists', 'status' => 2]);
+                return response()->json(['error' => 'Oops! Chapter name already exists under this course name', 'status' => 2]);
             }else{
                 $document = $request->pic;
                 $video = $request->video;
@@ -111,7 +112,7 @@ class CourseController extends Controller
                     'subject_id' => $request->subject_id,
                     'course_pic' => $imgFile,
                     'course_video' => $videoFile,
-                    'durations' => $request->duration,
+                    'durations' => $request->duration.' '.$request->duration_type,
                     'publish_date' => Carbon::parse($request->publish_date.$request->publish_time)->format('Y-m-d H:i:s'),
                     'time' => Carbon::parse($request->publish_time)->format('H:i:s'),
                     'description' =>  \ConsoleTVs\Profanity\Builder::blocker($request->data, BadWords::badWordsReplace)->strictClean(false)->filter(),
