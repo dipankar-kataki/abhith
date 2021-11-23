@@ -40,7 +40,11 @@ class ReportPostController extends Controller
         ]);
         ReportPost::where('knowledge_forum_post_id',$postId)->update([
             'is_activate' =>  $status
-        ]);;
-        return response()->json(['success' => 'Post status updated successfully']);
+        ]);
+        if($status == 0){
+            return response()->json(['success' => 'Post visibility updated from show to hide']);
+        }else{
+            return response()->json(['success' => 'Post visibility updated from hide to show']);
+        }
     }
 }

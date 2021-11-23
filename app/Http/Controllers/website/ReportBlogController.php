@@ -39,6 +39,10 @@ class ReportBlogController extends Controller
         ReportBlog::where('blogs_id' ,$request->blog_id)->update([ 'is_activate' => $request->active, ]);
         Blog::where('id' ,$request->blog_id)->update([ 'is_activate' => $request->active, ]);
 
-        return response()->json(['message' => 'Blog status updated successfully']);
+        if($request->active == 0){
+            return response()->json(['success' => 'Blog visibility updated from show to hide']);
+        }else{
+            return response()->json(['success' => 'Blog visibility updated from hide to show']);
+        }
     }
 }
