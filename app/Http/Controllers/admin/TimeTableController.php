@@ -31,6 +31,12 @@ class TimeTableController extends Controller
         return view('website.time-table.time-table')->with(['data' =>  $data]);
     }
 
+
+
+    public function adminViewTimeTable(Request $request){
+        
+    }
+
     public function timeTable(Request $request){
 
         $courses = Course::where('is_activate', Activation::Activate)->orderBy('id', 'DESC')->get();

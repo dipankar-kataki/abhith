@@ -122,6 +122,7 @@ Route::prefix('enrolled')->group(function(){
 
 /* ------------------------------- Time Table ------------------------------------ */
 Route::prefix('time-table')->group(function(){
+    Route::get('view-time-table',[ TimeTableController::class, 'adminViewTimeTable'])->name('admin.view.time.table');
     Route::get('timeTable',[ TimeTableController::class, 'timeTable'])->name('admin.time.table');
     Route::post('addTimeTable',[ TimeTableController::class, 'addTimeTable'])->name('admin.add.time.table');
 });
