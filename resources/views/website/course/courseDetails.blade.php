@@ -188,7 +188,7 @@
                     this.checked = true;
                     allPrice = parseFloat(allPrice) + parseFloat($(this).attr("data-price"));
                     chapterId.push($(this).data('id'));
-                    $('#total_price').html('<i class="fa fa-inr" aria-hidden="true"></i>' + allPrice)
+                    $('#total_price').html('<i class="fa fa-inr" aria-hidden="true"></i>' + allPrice + '.00')
                     console.log($(this).attr("data-price"));
                     $('#add_cart').prop('disabled', false)
                     $("#add_cart").css("background-color", "#3ac162");
@@ -199,7 +199,7 @@
                     this.checked = false;
                     allPrice = 0.00
                     chapterId = [];
-                    $('#total_price').html('<i class="fa fa-inr" aria-hidden="true"></i>' + allPrice)
+                    $('#total_price').html('<i class="fa fa-inr" aria-hidden="true"></i>' + allPrice + '.00')
                     $('#add_cart').prop('disabled', true)
                     $("#add_cart").css("background-color", "grey");
 
@@ -212,7 +212,7 @@
             if (this.checked) {
                 allPrice = parseFloat(allPrice) + parseFloat($(this).attr("data-price"));
                 chapterId.push($(this).data('id'));
-                $('#total_price').html('<i class="fa fa-inr" aria-hidden="true"></i>' + allPrice)
+                $('#total_price').html('<i class="fa fa-inr" aria-hidden="true"></i>' + allPrice + '.00')
                 $('#add_cart').prop('disabled', false)
                 $("#add_cart").css("background-color", "#3ac162");
             } else {
@@ -222,7 +222,7 @@
                 if (indexOf > -1) {
                     chapterId.splice(indexOf, 1);
                 }
-                $('#total_price').html('<i class="fa fa-inr" aria-hidden="true"></i>' + allPrice)
+                $('#total_price').html('<i class="fa fa-inr" aria-hidden="true"></i>' + allPrice + '.00')
                 if (allPrice == 0) {
                     $('#add_cart').prop('disabled', true)
                     $("#add_cart").css("background-color", "grey");

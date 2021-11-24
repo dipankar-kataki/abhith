@@ -1493,6 +1493,8 @@ footer {
 
 .total {
     position: relative;
+    padding-left: 30px;
+    font-size: 1.3rem;
 }
 
 .course-price1 {

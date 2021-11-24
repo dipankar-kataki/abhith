@@ -102,3 +102,11 @@
 #portfoliolist > .portfolio{
     padding: 5px;
 }
+
+select.form-control{
+    color: #111;
+}
+
+#add_cart{
+    font-weight: 700;
+}
