@@ -2,6 +2,24 @@
 
 @section('title','Time Table')
 
+@section('head')
+<style>
+    @import url("https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css");
+    table{
+        border: 1px solid #f3f3f3;
+        border-radius: 10px;
+        box-shadow: 0px 5px 5px #efecec;
+    }
+    th{
+        border-top:0px !important;
+    }
+    #time_table_filter{
+        margin-top:-30px;
+    }
+</style>
+
+@endsection
+
 @section('content')
 
     <div class="page-header">
