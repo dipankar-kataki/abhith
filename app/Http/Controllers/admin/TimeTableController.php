@@ -22,7 +22,9 @@ class TimeTableController extends Controller
             $details = Order::where('user_id', Auth::user()->id)->get();
             foreach($details as $item){
                 $time_data = TimeTable::with('course', 'chapter')->where('course_id',$item->course_id)->where('chapter_id', $item->chapter_id)->where('is_activate', 1)->orderBy('created_at','DESC')->get();
-                array_push($new_table,$time_data);
+                if(! $time_data->isEmpty()){
+                    array_push($new_table,$time_data);
+                }
             }
         }
 
