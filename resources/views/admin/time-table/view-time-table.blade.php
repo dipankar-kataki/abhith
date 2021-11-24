@@ -23,7 +23,7 @@
     <div class="col-lg-12 grid-margin">
         <div class="card">
             <div class="card-body">
-                <table class="table table-bordered">
+                <table id="time_table" class="table table-bordered">
                     <thead>
                         <tr>
                             <th> # </th>
@@ -94,5 +94,13 @@
                 }
             });
         });
+
+        $(document).ready( function () {
+            $('#time_table').DataTable({
+                "processing": true,
+                'searching':false
+            });
+        });
+    
     </script>
 @endsection
