@@ -82,7 +82,7 @@
             data: formData,
 
             success: function(result) {
-               toastr.success(result.message)
+               toastr.success(result.success)
             },
             error:function(xhr, status, error){
                 if(xhr.status == 500 || xhr.status == 422){
