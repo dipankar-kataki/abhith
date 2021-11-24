@@ -86,12 +86,13 @@
                 $('#selectChapter').find('option').remove().end();
                 let chapters = [];
                 $.ajax({
-                    url:"{{route('admin.time.table')}}",
+                    url:"{{route('admin.create.time.table')}}",
                     type:'GET',
                     data:{
                         'course_id' : $('#selectCourse, option').val(),
                     },
                     success:function(result){
+                        // console.log(result.chapter)
                         chapters  = result.chapter;
                         let chapter = document.getElementById('selectChapter');
                         let df = document.createDocumentFragment();
@@ -102,6 +103,7 @@
                             df.appendChild(option);
                         }
                         chapter.appendChild(df);
+                        location.reload(true);
                     },
                     error:function(xhr, status, error){
                         if(xhr.status == 500 || xhr.status == 422){
@@ -116,7 +118,7 @@
                 e.preventDefault();
                 let formdata = new FormData(this);
                 $.ajax({
-                    url:"{{route('admin.add.time.table')}}",
+                    url:"{{route('admin.save.time.table')}}",
                     type:"POST",
                     data: formdata,
                     processData: false,
@@ -145,6 +147,7 @@
         });
 
         $('#add_time').timepicker({});
+        
 
     </script>
 

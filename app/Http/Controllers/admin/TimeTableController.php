@@ -26,18 +26,17 @@ class TimeTableController extends Controller
                 array_push($data, $time_data);
             }
         }
-        
-        
         return view('website.time-table.time-table')->with(['data' =>  $data]);
     }
 
 
 
     public function adminViewTimeTable(Request $request){
-        
+        $getTimeTables = TimeTable::where('is_activate',1)->orderBy('created_at','DESC')->get();
+        return view('admin.time-table.view-time-table')->with(['getTimeTables' => $getTimeTables]);
     }
 
-    public function timeTable(Request $request){
+    public function adminCreateTimeTable(Request $request){
 
         $courses = Course::where('is_activate', Activation::Activate)->orderBy('id', 'DESC')->get();
         $chapters = [];
@@ -49,7 +48,7 @@ class TimeTableController extends Controller
         return view('admin.time-table.add-time-table')->with(['chapter' => $chapters, 'course' => $courses]);
     }
 
-    public function addTimeTable(Request $request){
+    public function saveTimeTable(Request $request){
         $chapter = $request->chapter;
         $course = $request->course;
         $zoom_link = $request->zoom_link;
@@ -81,6 +80,20 @@ class TimeTableController extends Controller
             return response()->json(['message' => 'Time Table created successfully']);
         }else{
             return response()->json(['message' => 'Oops! Something went wrong']);
+        }
+    }
+
+
+    public function changeVisibility(Request $request){
+        $timeTable = $request->timeTable;
+        $status = $request->active;
+        TimeTable::where('id',$timeTable)->update([
+            'is_activate' =>  $status
+        ]);
+        if($status == 0){
+            return response()->json(['message' => 'Time-Table visibility updated from show to hide']);
+        }else{
+            return response()->json(['message' => 'Time-Table visibility updated from hide to show']);
         }
     }
 }

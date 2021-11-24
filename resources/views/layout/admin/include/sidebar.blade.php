@@ -64,7 +64,7 @@
                 <i class="mdi  mdi-account-multiple menu-icon"></i></a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="{{route('admin.time.table')}}"><span class="menu-title">Add Time-Table</span>
+            <a class="nav-link" href="{{route('admin.view.time.table')}}"><span class="menu-title">Time-Table</span>
                 <i class="mdi  mdi-calendar-clock menu-icon"></i></a>
         </li>
     </ul>
