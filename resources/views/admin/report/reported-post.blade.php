@@ -56,6 +56,9 @@
     
                         </tbody>
                     </table>
+                    <div style="float: right;margin-top:10px;">
+                        {{$reportedPosts->links()}}
+                    </div>
                 </div>
             </div>
         </div>

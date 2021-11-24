@@ -28,7 +28,7 @@
                     <tbody>
                         @forelse ($reportedBlogs as $key => $item)
                             <tr>
-                                <td> {{ $key + 1 }} </td>
+                                <td> {{ $reportedBlogs->firstItem() + $key }} </td>
                                 <td>{{ $item->blogs->name }}</td>
                                 <td>{{ $item->report_count }}</td>
                                 <td>
@@ -55,6 +55,9 @@
 
                     </tbody>
                 </table>
+                <div style="float: right;margin-top:10px;">
+                    {{$reportedBlogs->links()}}
+                </div>
             </div>
         </div>
     </div>
