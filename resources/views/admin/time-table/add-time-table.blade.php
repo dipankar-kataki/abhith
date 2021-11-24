@@ -60,7 +60,7 @@
                     </div>
                     <div class="form-group">
                         <label for="exampleInputCity1">Add Zoom Link</label>
-                        <input type="text" class="form-control" name="zoom_link" id="add_zoom_link" placeholder="e.g https://zoom.com/erjdknc22334455kdsl" required>
+                        <input type="url" class="form-control" name="zoom_link" id="add_zoom_link" placeholder="e.g https://zoom.com/erjdknc22334455kdsl" required>
                         <span class="text-danger">
                             @error('zoom_link')
                                 {{$message}}
@@ -103,7 +103,7 @@
                             df.appendChild(option);
                         }
                         chapter.appendChild(df);
-                        location.reload(true);
+                        
                     },
                     error:function(xhr, status, error){
                         if(xhr.status == 500 || xhr.status == 422){
@@ -126,6 +126,7 @@
                     success:function(result){
                        toastr.success(result.message);
                        $('#addTimeTableForm')[0].reset();
+                       location.reload(true);
                     },
                     error:function(xhr, status, error){
                         if(xhr.status == 500 || xhr.status == 422){

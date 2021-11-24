@@ -17,16 +17,17 @@ class TimeTableController extends Controller
 {
 
     public function websiteViewTimeTable(Request $request){
-        $data = [];
+        $new_table = [];
         if(Auth::check()){
             $details = Order::where('user_id', Auth::user()->id)->get();
             foreach($details as $item){
-            
-                $time_data = TimeTable::with('course', 'chapter')->where('course_id', $item->course_id)->where('chapter_id', $item->chapter_id)->where('is_activate', 1)->get();
-                array_push($data, $time_data);
+                $time_data = TimeTable::with('course', 'chapter')->where('course_id',$item->course_id)->where('chapter_id', $item->chapter_id)->where('is_activate', 1)->get();
+                array_push($new_table,$time_data);
             }
         }
-        return view('website.time-table.time-table')->with(['data' =>  $data]);
+
+        return view('website.time-table.time-table')->with(['time_data' =>  $new_table]);            
+        
     }
 
 
