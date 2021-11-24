@@ -36,22 +36,29 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {{-- @php
-                                echo '<pre>';
-                                    print_r($time_data) ;
-                                    die();
-                                echo '</pre>';    
-                                @endphp --}}
-                                @forelse ($time_data as $key => $item)
-                                    <tr>
-                                        <td>{{$key + 1}}</td>
-                                        <td>{{$item[0]['course']['name']}}</td>
-                                        <td>{{$item[0]['chapter']['name']}}</td>
-                                        <td>{{$item[0]['date']}}</td>
-                                        <td>{{$item[0]['time']}}</td>
-                                        <td>{{$item[0]['zoom_link']}}</td>
-                                    </tr>
-                                @empty
+                                @if ($time_data != [])
+                                    @forelse ($time_data as $key => $item)
+                                        <tr>
+                                            <td>{{$key + 1}}</td>
+                                            <td>{{$item[0]['course']['name']}}</td>
+                                            <td>{{$item[0]['chapter']['name']}}</td>
+                                            <td>{{$item[0]['date']}}</td>
+                                            <td>{{$item[0]['time']}}</td>
+                                            <td>{{$item[0]['zoom_link']}}</td>
+                                        </tr>
+                                    @empty
+                                        <tr class="text-center">
+                                            <td colspan="6">
+                                                @auth
+                                                    <strong>Oops! No Time-Table Found.</strong>                                                
+                                                @endauth
+                                                @guest
+                                                    <strong>Login to check time-table.</strong>  
+                                                @endguest
+                                            </td>
+                                        </tr>
+                                    @endforelse
+                                @else
                                     <tr class="text-center">
                                         <td colspan="6">
                                             @auth
@@ -62,7 +69,8 @@
                                             @endguest
                                         </td>
                                     </tr>
-                                @endforelse
+                                @endif
+                                
                             </tbody>
                         </table>
                     </div>
