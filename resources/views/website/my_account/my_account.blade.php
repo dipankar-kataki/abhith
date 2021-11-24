@@ -354,7 +354,7 @@
                                                 <td>{{$item->course->name}}</td>
                                                 <td>{{$item->chapter->name}}</td>
                                                 <td>{{$item->chapter->price}}</td>
-                                                <td>{{$item->updated_at->diffForHumans() }}</td>
+                                                <td>{{$item->updated_at->format('d, M Y') }}</td>
                                             </tr>
                                         @empty
                                             <tr>

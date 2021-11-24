@@ -76,7 +76,7 @@
                             </tr>
                         @empty
                         <tr class="text-center">
-                            <td colspan="4"><strong>Oops! No time table found.</strong></td>
+                            <td colspan="6"><strong>Oops! No time table found.</strong></td>
                         </tr>
                         @endforelse
                     </tbody>
