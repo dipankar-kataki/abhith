@@ -31,7 +31,7 @@ class ReportBlogController extends Controller
 
 
     public function getReportedBlog(Request $request){
-        $reportedBlogs = ReportBlog::simplePaginate(10);
+        $reportedBlogs = ReportBlog::orderBy('created_at','DESC')->simplePaginate(10);
         return view('admin.report.reported-blog')->with(['reportedBlogs' => $reportedBlogs]);
     }
 

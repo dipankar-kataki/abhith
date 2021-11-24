@@ -28,7 +28,7 @@ class ReportPostController extends Controller
     }
 
     public function getReportedPost(Request $request){
-        $reportedPosts = ReportPost::simplePaginate(10);
+        $reportedPosts = ReportPost::orderBy('created_at','DESC')->simplePaginate(10);
         return view('admin.report.reported-post')->with(['reportedPosts' => $reportedPosts]);
     }
 
