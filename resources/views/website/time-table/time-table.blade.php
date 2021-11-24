@@ -36,7 +36,6 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if (!empty($time_data) )
                                     @forelse ($time_data as $key => $item)
                                         <tr>
                                             <td>{{$key + 1}}</td>
@@ -58,19 +57,6 @@
                                             </td>
                                         </tr>
                                     @endforelse
-                                @else
-                                    <tr class="text-center">
-                                        <td colspan="6">
-                                            @auth
-                                                <strong>Oops! No Time-Table Found.</strong>                                                
-                                            @endauth
-                                            @guest
-                                                <strong>Login to check time-table.</strong>  
-                                            @endguest
-                                        </td>
-                                    </tr>
-                                @endif
-                                
                             </tbody>
                         </table>
                     </div>
