@@ -40,11 +40,11 @@
                                     @forelse ($time_data as $key => $item)
                                         <tr>
                                             <td>{{$key + 1}}</td>
-                                            <td>{{$item[0]['course']['name']}}</td>
-                                            <td>{{$item[0]['chapter']['name']}}</td>
-                                            <td>{{$item[0]['date']}}</td>
-                                            <td>{{$item[0]['time']}}</td>
-                                            <td>{{$item[0]['zoom_link']}}</td>
+                                            <td>{{$item[$key]['course']['name']}}</td>
+                                            <td>{{$item[$key]['chapter']['name']}}</td>
+                                            <td>{{$item[$key]['date']}}</td>
+                                            <td>{{$item[$key]['time']}}</td>
+                                            <td>{{$item[$key]['zoom_link']}}</td>
                                         </tr>
                                     @empty
                                         <tr class="text-center">
