@@ -36,7 +36,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if ($time_data != [])
+                                @if (!empty($time_data) )
                                     @forelse ($time_data as $key => $item)
                                         <tr>
                                             <td>{{$key + 1}}</td>
