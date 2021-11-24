@@ -2,6 +2,24 @@
 
 @section('title','Enrolled Students')
 
+@section('head')
+<style>
+    @import url("https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css");
+    table{
+        border: 1px solid #f3f3f3;
+        border-radius: 10px;
+        box-shadow: 0px 5px 5px #efecec;
+    }
+    th{
+        border-top:0px !important;
+    }
+    #enrolled_students_table_filter{
+        margin-top:-30px;
+    }
+</style>
+
+@endsection
+
 @section('content')
 
     <div class="page-header">
@@ -16,7 +34,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-bordered">
+                    <table id="enrolled_students_table" class="table table-bordered">
                         <thead>
                             <tr>
                                 <th> # </th>
@@ -65,5 +83,15 @@
 @endsection
 
 @section('scripts')
-
+    <script>
+         $(document).ready( function () {
+            $('#enrolled_students_table').DataTable({
+                "processing": true,
+                dom: 'Bfrtip',
+                buttons: [ 
+                    'excel', 'pdf', 'print'
+                ]
+            });
+        });
+    </script>
 @endsection

@@ -8,7 +8,7 @@
             <h4 class="small-heading-black">
                 {{ $answer->knowledgeForumPost->question }}</h4>
             <p class="text-justify">
-                {{ $answer->knowledgeForumPost->description }}</p>
+                {!! $answer->knowledgeForumPost->description !!}</p>
             <a href="#"
                 class="post-link">{{ $answer->knowledgeForumPost->links }}</a>
             <div class="answer-btn-box">

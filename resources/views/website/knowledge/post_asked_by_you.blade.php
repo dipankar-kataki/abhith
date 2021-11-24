@@ -5,7 +5,7 @@
         <p class="small-text-heading">Posted: {{ $question->created_at->diffForHumans() }}
         </p>
         <h4 class="small-heading-black">{{ $question->question }}</h4>
-        <p class="text-justify">{{ $question->description }}</p>
+        <p class="text-justify">{!! $question->description !!}</p>
         <a href="#" class="post-link">{{ $question->links }}</a>
         <div class="answer-btn-box">
             <ul class="list-inline answer-btn-list">
