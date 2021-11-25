@@ -37,57 +37,62 @@
 
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
-            <div class="card-body" style="overflow-x: auto">
+            <div class="card-body">
                 <h4 class="card-title">Banner List</h4>
                 </p>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th> # </th>
-                            <th> Banner name </th>
-                            <th> Banner </th>
-                            <th> Status </th>
-                            <th> Description </th>
-                            <th> Action </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($banners as $key => $item)
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
                             <tr>
-                                <td> {{ $key + 1 }} </td>
-                                <td> {{ $item->name }} </td>
-                                <td>
-                                    <img src="{{ asset($item->banner_image) }}" alt="" srcset="">
-                                </td>
-                                <td>
-                                    @if ($item->is_activate == 1)
-                                        <label class="switch">
-                                            <input type="checkbox" id="testingUpdate" data-id="{{ $item->id }}" checked>
-                                            <span class="slider round"></span>
-                                        </label>
-                                    @else
-                                        <label class="switch">
-                                            <input type="checkbox" id="testingUpdate" data-id="{{ $item->id }}">
-                                            <span class="slider round"></span>
-                                        </label>
-                                    @endif
-                                </td>
-                                <td>
-                                    {{-- {!! $item->description !!} --}}
-                                    {{-- {!! Illuminate\Support\Str::limit($item->description, 100, ' ...')!!} --}}
-                                    {!! Illuminate\Support\Str::limit(strip_tags($item->description), $limit = 50, $end = '...') !!}
-                                </td>
-                                <td>
-                                    <a href="{{ route('admin.edit.banner', ['id' => \Crypt::encrypt($item->id)]) }}"
-                                        class="btn btn-gradient-primary btn-rounded btn-icon anchor_rounded">
-                                        <i class="mdi mdi-pencil-outline"></i>
-                                    </a>
-                                </td>
+                                <th> # </th>
+                                <th> Banner name </th>
+                                <th> Banner </th>
+                                <th> Status </th>
+                                <th> Description </th>
+                                <th> Action </th>
                             </tr>
-                        @endforeach
-
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @foreach ($banners as $key => $item)
+                                <tr>
+                                    <td> {{ $key + 1 }} </td>
+                                    <td> {{ $item->name }} </td>
+                                    <td>
+                                        <img src="{{ asset($item->banner_image) }}" alt="" srcset="">
+                                    </td>
+                                    <td>
+                                        @if ($item->is_activate == 1)
+                                            <label class="switch">
+                                                <input type="checkbox" id="testingUpdate" data-id="{{ $item->id }}" checked>
+                                                <span class="slider round"></span>
+                                            </label>
+                                        @else
+                                            <label class="switch">
+                                                <input type="checkbox" id="testingUpdate" data-id="{{ $item->id }}">
+                                                <span class="slider round"></span>
+                                            </label>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        {{-- {!! $item->description !!} --}}
+                                        {{-- {!! Illuminate\Support\Str::limit($item->description, 100, ' ...')!!} --}}
+                                        {!! Illuminate\Support\Str::limit(strip_tags($item->description), $limit = 50, $end = '...') !!}
+                                    </td>
+                                    <td>
+                                        <a href="{{ route('admin.edit.banner', ['id' => \Crypt::encrypt($item->id)]) }}"
+                                            class="btn btn-gradient-primary btn-rounded btn-icon anchor_rounded">
+                                            <i class="mdi mdi-pencil-outline"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            @endforeach
+    
+                        </tbody>
+                    </table>
+                </div>
+                <div style="float:right;margin-top:10px;">
+                    {{$banners->links()}}
+                </div>
             </div>
         </div>
     </div>
