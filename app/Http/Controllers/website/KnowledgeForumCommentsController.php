@@ -36,6 +36,7 @@ class KnowledgeForumCommentsController extends Controller
         KnowledgeForumPost::where('id', $request->post_id,)->update(['total_comments' => $total_comments]);
 
         if($create){
+            $request->session()->flash('comment_posted','Comment added successfully');
             return back()->with(['comment_posted' => 'Comment added successfully']);
         }else{
             return back()->with(['comment_error' => 'Oops! something went wrong. Not able to Comment']);

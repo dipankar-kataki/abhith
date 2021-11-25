@@ -174,4 +174,10 @@
         redditBtn.setAttribute('href',`https://reddit.com/submit?url=${postUrl}&title=${postTitle}`);
 
     </script>
+
+    @if (session('comment_posted'))
+        <script>
+            toastr.success("{!! session('comment_posted') !!}");
+        </script>
+    @endif
 @endsection
