@@ -28,20 +28,20 @@ $course = Course::where('is_activate', Activation::Activate)->get();
                     <div class="form-group">
                         <label for="exampleInputName1">Name</label>
                         <input type="text" class="form-control" id="banner_name" name="name"
-                            placeholder="Enter Banner Name">
+                            placeholder="Enter Banner Name" required>
                         <span class="text-danger" id="name_error"></span>
                     </div>
 
                     <div class="form-group">
                         <label>File upload</label>
                         <input type="file" class="filepond" name="pic" id="banner_pic" data-max-file-size="1MB"
-                            data-max-files="1" />
+                            data-max-files="1"  required/>
                         <span class="text-danger" id="pic_error"></span>
                     </div>
 
                     <div class="form-group">
                         <label for="exampleTextarea1">Description</label>
-                        <textarea class="form-control"  name="description" rows="4"></textarea>
+                        <textarea class="form-control"  name="description" rows="4" required></textarea>
                         <span class="text-danger" id="description_error"></span>
                     </div>
 
