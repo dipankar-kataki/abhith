@@ -56,7 +56,7 @@
                             @foreach ($banners as $key => $item)
                                 <tr>
                                     <td> {{ $key + 1 }} </td>
-                                    <td> {{ $item->name }} </td>
+                                    <td> {!! Illuminate\Support\Str::limit(strip_tags($item->name), $limit = 50, $end = '...') !!} </td>
                                     <td>
                                         <img src="{{ asset($item->banner_image) }}" alt="" srcset="">
                                     </td>
