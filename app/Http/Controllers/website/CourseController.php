@@ -88,8 +88,15 @@ class CourseController extends Controller
         return view('website.course.course',\compact('subjects','publishCourse'));
     }
 
-    protected function details(Request $request)
+    protected function details(Request $request, $id)
     {
+        $course_id = 0;
+
+        if($id == null){
+            $course_id = \Crypt::decrypt($request->id);
+        }else{
+            $course_id = \Crypt::decrypt($id);
+        }
         # code...
         $course_id = \Crypt::decrypt($request->id);
         $course = Course::find($course_id);
