@@ -8,12 +8,13 @@
                     <div class="subheader1-desc">
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a href="course.html">Courses</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">{{ $course->subject->name }}</li>
+                                <li class="breadcrumb-item"><a href="course.html">Course</a></li>
+                                <li class="breadcrumb-item active" aria-current="page"><strong>{{ $course->name }}</strong></li>
+                                <li class="breadcrumb-item active" aria-current="page">Subject&nbsp; <i class="fa fa-level-down" aria-hidden="true"></i></li>
                             </ol>
                         </nav>
-                        <h2 class="heading-white">{{ $course->subject->name }}</h2>
-                        <p>{{ $course->name }}</p>
+                        <h2 class="heading-white"><span style="font-size:12px;"></span>{{ $course->subject->name }}</h2>
+                        <p></p>
                         <div class="text-box">
                             @auth
                                 <a href="#" class="mcq-test" style="cursor: pointer">MCQ Test</a>
@@ -188,7 +189,7 @@
                     this.checked = true;
                     allPrice = parseFloat(allPrice) + parseFloat($(this).attr("data-price"));
                     chapterId.push($(this).data('id'));
-                    $('#total_price').html('<i class="fa fa-inr" aria-hidden="true"></i>' + allPrice + '.00')
+                    $('#total_price').html('<i class="fa fa-inr" aria-hidden="true"></i>' + allPrice)
                     console.log($(this).attr("data-price"));
                     $('#add_cart').prop('disabled', false)
                     $("#add_cart").css("background-color", "#3ac162");
@@ -199,7 +200,7 @@
                     this.checked = false;
                     allPrice = 0.00
                     chapterId = [];
-                    $('#total_price').html('<i class="fa fa-inr" aria-hidden="true"></i>' + allPrice + '.00')
+                    $('#total_price').html('<i class="fa fa-inr" aria-hidden="true"></i>' + allPrice)
                     $('#add_cart').prop('disabled', true)
                     $("#add_cart").css("background-color", "grey");
 
@@ -212,7 +213,7 @@
             if (this.checked) {
                 allPrice = parseFloat(allPrice) + parseFloat($(this).attr("data-price"));
                 chapterId.push($(this).data('id'));
-                $('#total_price').html('<i class="fa fa-inr" aria-hidden="true"></i>' + allPrice + '.00')
+                $('#total_price').html('<i class="fa fa-inr" aria-hidden="true"></i>' + allPrice)
                 $('#add_cart').prop('disabled', false)
                 $("#add_cart").css("background-color", "#3ac162");
             } else {
@@ -222,7 +223,7 @@
                 if (indexOf > -1) {
                     chapterId.splice(indexOf, 1);
                 }
-                $('#total_price').html('<i class="fa fa-inr" aria-hidden="true"></i>' + allPrice + '.00')
+                $('#total_price').html('<i class="fa fa-inr" aria-hidden="true"></i>' + allPrice)
                 if (allPrice == 0) {
                     $('#add_cart').prop('disabled', true)
                     $("#add_cart").css("background-color", "grey");
