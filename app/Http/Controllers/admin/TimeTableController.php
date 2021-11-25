@@ -19,17 +19,21 @@ class TimeTableController extends Controller
     public function websiteViewTimeTable(Request $request){
         $new_table = [];
         if(Auth::check()){
-            $details = Order::where('user_id', Auth::user()->id)->get();
-            foreach($details as $item){
-                $time_data = TimeTable::with('course', 'chapter')->where('course_id',$item->course_id)->where('chapter_id', $item->chapter_id)->where('is_activate', 1)->orderBy('created_at','DESC')->get();
-                if(! $time_data->isEmpty()){
-                    array_push($new_table,$time_data);
+            $details = Order::where('user_id', Auth::user()->id)->where('payment_status','paid')->get();
+            if($details->isEmpty()){
+                return view('website.time-table.time-table')->with(['time_data' =>  $new_table]);            
+            }else{
+                foreach($details as $item){
+                    $time_data = TimeTable::with('course', 'chapter')->where('course_id',$item->course_id)->where('chapter_id', $item->chapter_id)->where('is_activate', 1)->orderBy('created_at','DESC')->get();
+                    if(! $time_data->isEmpty()){
+                        array_push($new_table,$time_data);
+                    }
                 }
             }
+            
         }
 
         return view('website.time-table.time-table')->with(['time_data' =>  $new_table]);            
-        
     }
 
 
