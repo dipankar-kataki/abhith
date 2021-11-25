@@ -41,7 +41,7 @@ $course = Course::where('is_activate', Activation::Activate)->get();
 
                     <div class="form-group">
                         <label for="exampleTextarea1">Description</label>
-                        <textarea class="form-control" id="editor" name="description"
+                        <textarea class="form-control"  name="description"
                             rows="4">{{ $banner->description }}</textarea>
                     </div>
 
@@ -92,13 +92,13 @@ $course = Course::where('is_activate', Activation::Activate)->get();
 
 
     <script>
-        window.onload = function() {
-            CKEDITOR.replace('editor', {
-                height: 200,
-                filebrowserUploadMethod: 'form',
-                filebrowserUploadUrl: '{{ route('admin.course.upload', ['_token' => csrf_token()]) }}'
-            });
-        };
+        // window.onload = function() {
+        //     CKEDITOR.replace('editor', {
+        //         height: 200,
+        //         filebrowserUploadMethod: 'form',
+        //         filebrowserUploadUrl: '{{ route('admin.course.upload', ['_token' => csrf_token()]) }}'
+        //     });
+        // };
 
         $("#course_list").prop('required',false);
 
@@ -136,8 +136,8 @@ $course = Course::where('is_activate', Activation::Activate)->get();
             e.preventDefault(); // avoid to execute the actual submit of the form.
 
             var formdata = new FormData(this);
-            var data = CKEDITOR.instances.editor.getData();
-            formdata.append('description', data);
+            // var data = CKEDITOR.instances.editor.getData();
+            // formdata.append('description', data);
 
             pondFiles = pond.getFiles();
             for (var i = 0; i < pondFiles.length; i++) {
@@ -167,6 +167,7 @@ $course = Course::where('is_activate', Activation::Activate)->get();
                     },
                     200: function(data) {
                         // $('#bannerForm').trigger("reset");
+                        toastr.success(data.message);
                         location.reload();
                         // alert('200 status code! success');
                     },

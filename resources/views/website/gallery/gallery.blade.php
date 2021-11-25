@@ -27,7 +27,7 @@
                             @foreach ($gallery as $item)
                                 <li class="portfolio">
                                     <a href="{{asset($item->gallery) }}"
-                                        class='portfolio- cwrapper fancybox imgContainer' data-fancybox="images"
+                                        class='portfolio- cwrapper fancybox imgContainer' data-fancybox="images" data-caption="{{$item->name}}"
                                         data-fancybox-group='image-gallery'>
                                         <img src="{{ asset($item->gallery) }}"/>
                                     </a>
@@ -49,11 +49,17 @@
     <script src="{{ asset('asset_website/js/jquery.fancybox.js') }}"></script>
     <script type="text/javascript">
         $('[data-fancybox="images"]').fancybox({
+            beforeShow : function(){
+            this.title =  $(this.element).data("caption");
+            },
             thumbs: {
                 autoStart: true
             }
         });
         $('[data-fancybox="images1"]').fancybox({
+            beforeShow : function(){
+                this.title =  $(this.element).data("caption");
+            },
             thumbs: {
                 autoStart: true
             }

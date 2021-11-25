@@ -41,7 +41,7 @@ $course = Course::where('is_activate', Activation::Activate)->get();
 
                     <div class="form-group">
                         <label for="exampleTextarea1">Description</label>
-                        <textarea class="form-control" id="editor" name="description" rows="4"></textarea>
+                        <textarea class="form-control"  name="description" rows="4"></textarea>
                         <span class="text-danger" id="description_error"></span>
                     </div>
 
@@ -84,13 +84,13 @@ $course = Course::where('is_activate', Activation::Activate)->get();
 
 
     <script>
-         window.onload = function() {
-            CKEDITOR.replace('editor', {
-                height: 200,
-                filebrowserUploadMethod: 'form',
-                filebrowserUploadUrl: '{{ route('admin.course.upload', ['_token' => csrf_token()]) }}'
-            });
-        };
+        //  window.onload = function() {
+        //     CKEDITOR.replace('editor', {
+        //         height: 200,
+        //         filebrowserUploadMethod: 'form',
+        //         filebrowserUploadUrl: '{{ route('admin.course.upload', ['_token' => csrf_token()]) }}'
+        //     });
+        // };
         $('#course_id').hide();
         $("#course_list").prop('required',false);
         FilePond.registerPlugin(
@@ -131,8 +131,8 @@ $course = Course::where('is_activate', Activation::Activate)->get();
             $("#pic_error").empty();
 
             var formdata = new FormData(this);
-            var data = CKEDITOR.instances.editor.getData();
-            formdata.append('description', data);
+            // var data = CKEDITOR.instances.editor.getData();
+            // formdata.append('description', data);
 
             pondFiles = pond.getFiles();
             for (var i = 0; i < pondFiles.length; i++) {
@@ -161,10 +161,9 @@ $course = Course::where('is_activate', Activation::Activate)->get();
 
                     },
                     200: function(data) {
-                        // $('#bannerForm').trigger("reset");
+                        // console.log(data);
+                        toastr.success(data.message);
                         location.reload();
-
-                        // alert('200 status code! success');
                     },
                     500: function() {
                         alert('500 someting went wrong');

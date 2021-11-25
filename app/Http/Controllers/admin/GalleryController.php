@@ -42,7 +42,7 @@ class GalleryController extends Controller
             'gallery' => $file
         ]);
 
-        return response()->json(['status'=>1]);
+        return response()->json(['status'=>1, 'message' => 'Gallery created successfully']);
     }
 
     protected function active(Request $request) {
@@ -84,7 +84,7 @@ class GalleryController extends Controller
             $gallery->save();
         }
 
-        return response()->json(['status'=>1]);
+        return response()->json(['status'=>1, 'message' => 'Gallery details updated successfully']);
     }
 
 

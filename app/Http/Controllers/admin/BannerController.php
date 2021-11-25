@@ -32,7 +32,6 @@ class BannerController extends Controller
         $document = $request->pic;
         if (isset($document) && !empty($document)) {
             $new_name = date('d-m-Y-H-i-s') . '_' . $document->getClientOriginalName();
-            // $new_name = '/images/'.$image.'_'.date('d-m-Y-H-i-s');
             $document->move(public_path('/files/banner/'), $new_name);
             $file = 'files/banner/' . $new_name;
         }
@@ -44,7 +43,7 @@ class BannerController extends Controller
             'banner_image' => $file
         ]);
 
-        return response()->json(['status'=>1]);
+        return response()->json(['status' => 1,'message' => 'Banner created successfully']);
     }
 
     protected function active(Request $request) {
@@ -89,6 +88,6 @@ class BannerController extends Controller
 
         }
 
-        return response()->json(['status'=>1]);
+        return response()->json(['status'=>1, 'message' => 'Banner details updated successfully']);
     }
 }
