@@ -44,7 +44,13 @@
                                                 <td>{{$item[$key]['chapter']['name']}}</td>
                                                 <td>{{$item[$key]['date']}}</td>
                                                 <td>{{$item[$key]['time']}}</td>
-                                                <td>{{$item[$key]['zoom_link']}}</td>
+                                                <td>
+                                                    @if ($item[$key]['zoom_link'] == null)
+                                                        <p>Link not given</p>
+                                                    @else
+                                                        <a href="{{$item[$key]['zoom_link']}}" style="color:green">Join Class</a>
+                                                    @endif
+                                                </td>
                                             </tr>
                                         @empty
                                             <tr class="text-center">

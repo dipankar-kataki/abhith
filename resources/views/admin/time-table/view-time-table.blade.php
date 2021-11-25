@@ -41,46 +41,48 @@
     <div class="col-lg-12 grid-margin">
         <div class="card">
             <div class="card-body">
-                <table id="time_table" class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th> # </th>
-                            <th> Course Name</th>
-                            <th> Chapter Name</th>
-                            <th> Link</th>
-                            <th>Class Date & Time</th>
-                            <th> Action </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse ($getTimeTables as $key => $item)
+                <div class="table-responsive">
+                    <table id="time_table" class="table table-bordered">
+                        <thead>
                             <tr>
-                                <td>{{$key + 1}}</td>
-                                <td>{{$item->course->name}}</td>
-                                <td>{{$item->chapter->name}}</td>
-                                <td>{{$item->zoom_link}}</td>
-                                <td>{{$item->date}} &nbsp;at&nbsp; {{$item->time}}</td>
-                                <td>
-                                    @if ($item->is_activate == 1)
-                                        <label class="switch">
-                                            <input type="checkbox" id="timeTableUpdate" data-id="{{ $item->id }}" checked>
-                                            <span class="slider round"></span>
-                                        </label>
-                                    @else
-                                        <label class="switch">
-                                            <input type="checkbox" id="timeTableUpdate" data-id="{{ $item->id }}">
-                                            <span class="slider round"></span>
-                                        </label>
-                                    @endif
-                                </td>
+                                <th> # </th>
+                                <th> Course Name</th>
+                                <th> Chapter Name</th>
+                                <th> Link</th>
+                                <th>Class Date & Time</th>
+                                <th> Action </th>
                             </tr>
-                        @empty
-                        <tr class="text-center">
-                            <td colspan="6"><strong>Oops! No time table found.</strong></td>
-                        </tr>
-                        @endforelse
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @forelse ($getTimeTables as $key => $item)
+                                <tr>
+                                    <td>{{$key + 1}}</td>
+                                    <td>{{$item->course->name}}</td>
+                                    <td>{{$item->chapter->name}}</td>
+                                    <td>{!! Illuminate\Support\Str::limit(strip_tags($item->zoom_link), $limit = 50, $end = '...') !!}</td>
+                                    <td>{{$item->date}} &nbsp;at&nbsp; {{$item->time}}</td>
+                                    <td>
+                                        @if ($item->is_activate == 1)
+                                            <label class="switch">
+                                                <input type="checkbox" id="timeTableUpdate" data-id="{{ $item->id }}" checked>
+                                                <span class="slider round"></span>
+                                            </label>
+                                        @else
+                                            <label class="switch">
+                                                <input type="checkbox" id="timeTableUpdate" data-id="{{ $item->id }}">
+                                                <span class="slider round"></span>
+                                            </label>
+                                        @endif
+                                    </td>
+                                </tr>
+                            @empty
+                            <tr class="text-center">
+                                <td colspan="6"><strong>Oops! No time table found.</strong></td>
+                            </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
