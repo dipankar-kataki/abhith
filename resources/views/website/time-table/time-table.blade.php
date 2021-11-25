@@ -38,20 +38,22 @@
                                 </thead>
                                 <tbody>
                                         @forelse ($time_data as $key => $item)
-                                            <tr>
-                                                <td>{{$key + 1}}</td>
-                                                <td>{{$item[$key]['course']['name']}}</td>
-                                                <td>{{$item[$key]['chapter']['name']}}</td>
-                                                <td>{{$item[$key]['date']}}</td>
-                                                <td>{{$item[$key]['time']}}</td>
-                                                <td>
-                                                    @if ($item[$key]['zoom_link'] == null)
-                                                        <p>Link not given</p>
-                                                    @else
-                                                        <a href="{{$item[$key]['zoom_link']}}" style="color:green" target="_blank">Join Class</a>
-                                                    @endif
-                                                </td>
-                                            </tr>
+                                            @foreach ($item as $key2 => $item2)
+                                                <tr>
+                                                    <td>{{$key2 + 1}}</td>
+                                                    <td>{{$item2['course']['name']}}</td>
+                                                    <td>{{$item2['chapter']['name']}}</td>
+                                                    <td>{{$item2['date']}}</td>
+                                                    <td>{{$item2['time']}}</td>
+                                                    <td>
+                                                        @if ($item2['zoom_link'] == null)
+                                                            <p>Link not given</p>
+                                                        @else
+                                                            <a href="{{$item2['zoom_link']}}" style="color:green" target="_blank">Join Class</a>
+                                                        @endif
+                                                    </td>
+                                                </tr>
+                                            @endforeach
                                         @empty
                                             <tr class="text-center">
                                                 <td colspan="6">
