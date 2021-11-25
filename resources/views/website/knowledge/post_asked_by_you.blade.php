@@ -6,7 +6,7 @@
         </p>
         <h4 class="small-heading-black">{{ $question->question }}</h4>
         <p class="text-justify">{!! $question->description !!}</p>
-        <a href="#" class="post-link">{{ $question->links }}</a>
+        <a href="{{ $question->links }}" class="post-link">{{ $question->links }}</a>
         <div class="answer-btn-box">
             <ul class="list-inline answer-btn-list">
                 <li><a

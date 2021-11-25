@@ -9,7 +9,7 @@
                 {{ $answer->knowledgeForumPost->question }}</h4>
             <p class="text-justify">
                 {!! $answer->knowledgeForumPost->description !!}</p>
-            <a href="#"
+            <a href="{{ $answer->knowledgeForumPost->links }}"
                 class="post-link">{{ $answer->knowledgeForumPost->links }}</a>
             <div class="answer-btn-box">
                 <ul class="list-inline answer-btn-list">
