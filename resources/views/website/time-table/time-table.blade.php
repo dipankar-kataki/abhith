@@ -24,41 +24,43 @@
             <div class="col-12 grid-margin">
                 <div class="card">
                     <div class="card-body">
-                        <table id="time_table_website" class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th> # </th>
-                                    <th> Course Name </th>
-                                    <th> Chapter Name </th>
-                                    <th> Date </th>
-                                    <th> Time</th>
-                                    <th> Link</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                    @forelse ($time_data as $key => $item)
-                                        <tr>
-                                            <td>{{$key + 1}}</td>
-                                            <td>{{$item[$key]['course']['name']}}</td>
-                                            <td>{{$item[$key]['chapter']['name']}}</td>
-                                            <td>{{$item[$key]['date']}}</td>
-                                            <td>{{$item[$key]['time']}}</td>
-                                            <td>{{$item[$key]['zoom_link']}}</td>
-                                        </tr>
-                                    @empty
-                                        <tr class="text-center">
-                                            <td colspan="6">
-                                                @auth
-                                                    <strong>Oops! No Time-Table Found.</strong>                                                
-                                                @endauth
-                                                @guest
-                                                    <strong>Login to check time-table.</strong>  
-                                                @endguest
-                                            </td>
-                                        </tr>
-                                    @endforelse
-                            </tbody>
-                        </table>
+                        <div class="table-responsive">
+                            <table id="time_table_website" class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th> # </th>
+                                        <th> Course Name </th>
+                                        <th> Chapter Name </th>
+                                        <th> Date </th>
+                                        <th> Time</th>
+                                        <th> Link</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                        @forelse ($time_data as $key => $item)
+                                            <tr>
+                                                <td>{{$key + 1}}</td>
+                                                <td>{{$item[$key]['course']['name']}}</td>
+                                                <td>{{$item[$key]['chapter']['name']}}</td>
+                                                <td>{{$item[$key]['date']}}</td>
+                                                <td>{{$item[$key]['time']}}</td>
+                                                <td>{{$item[$key]['zoom_link']}}</td>
+                                            </tr>
+                                        @empty
+                                            <tr class="text-center">
+                                                <td colspan="6">
+                                                    @auth
+                                                        <strong>Oops! No Time-Table Found.</strong>                                                
+                                                    @endauth
+                                                    @guest
+                                                        <strong>Login to check time-table.</strong>  
+                                                    @endguest
+                                                </td>
+                                            </tr>
+                                        @endforelse
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
