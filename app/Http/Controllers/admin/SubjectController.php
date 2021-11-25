@@ -46,10 +46,14 @@ class SubjectController extends Controller
     }
 
     protected function edit(Request $request){
+       $request->validate([
+        'name' => 'required'
+       ]);
         $subject_id = \Crypt::decrypt($request->id);
         $subject = Subject::find($subject_id);
         $subject->name = $request->name;
         $subject->save();
+        $request->session()->flash('subject_update_message','Subject name updated successfully');
 
         return redirect()->back();
     }

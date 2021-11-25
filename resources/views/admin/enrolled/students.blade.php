@@ -62,7 +62,7 @@
                                             <span style="color: red;">Not Enrolled (payment {{$item->payment_status}})</span>
                                         @endif
                                     </td>
-                                    <td>{{$item->updated_at->format('Y-M-d')}}</td>
+                                    <td>{{$item->updated_at->format('d, M Y')}}</td>
                                     {{-- <td><a href="#">view</a></td> --}}
                                 </tr>
                            @empty

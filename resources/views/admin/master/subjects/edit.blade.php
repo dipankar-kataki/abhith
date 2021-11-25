@@ -12,12 +12,22 @@
             <input type="hidden" name="id" value="{{\Crypt::encrypt($subject->id)}}">
             <div class="form-group">
             <label for="exampleInputName1">Name</label>
-            <input type="text" class="form-control" id="subject_name" name="name" placeholder="Enter Subject Name" value="{{$subject->name}}">
+            <input type="text" class="form-control" id="subject_name" name="name" placeholder="Enter Subject Name" value="{{$subject->name}}" required>
+            @error('name')
+              <span style="color:red;">{{$message}}</span>
+            @enderror
           </div>
           <button type="submit" class="btn btn-gradient-primary mr-2">Submit</button>
         </form>
       </div>
     </div>
   </div>
+  
 @endsection
-
+@section('scripts')
+    @if (session('subject_update_message'))
+        <script>
+            toastr.success('{!! session('subject_update_message') !!}');
+        </script>
+    @endif
+@endsection
