@@ -43,6 +43,7 @@
                                 <th> Course Name </th>
                                 <th> Chapter Name </th>
                                 <th> Enroll Status </th>
+                                <th>Payment Status</th>
                                 <th> Date of Enrollment </th>
                                 {{-- <th>Details</th> --}}
                             </tr>
@@ -59,7 +60,14 @@
                                         @if ($item->payment_status == 'paid')
                                             <span style="color: green;">Enrolled</span>
                                         @else
-                                            <span style="color: red;">Not Enrolled (payment {{$item->payment_status}})</span>
+                                            <span style="color: red;">Not Enrolled</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if ($item->payment_status == 'paid')
+                                            <span style="color: green;">{{$item->payment_status}}</span>
+                                        @else
+                                            <span style="color: red;">{{$item->payment_status}}</span>
                                         @endif
                                     </td>
                                     <td>{{$item->updated_at->format('d, M Y')}}</td>
