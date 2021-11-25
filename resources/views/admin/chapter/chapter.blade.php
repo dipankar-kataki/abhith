@@ -123,6 +123,7 @@
         $('.updateChapterBtn').css('display','none');
         $('.chapterName').attr('disabled',true);
         $('.chapterPrice').attr('disabled',true);
+        location.reload(true);
     });
 
    
