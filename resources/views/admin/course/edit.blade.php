@@ -174,6 +174,7 @@ $subjects = Subject::where('is_activate', Activation::Activate)
 
                     },
                     200: function(data) {
+                        toastr.success(data.message);
                         location.reload();
 
                     },

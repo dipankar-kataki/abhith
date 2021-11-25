@@ -183,7 +183,7 @@ class CourseController extends Controller
             $course->save();
         }
 
-        return response()->json(['status'=>1]);
+        return response()->json(['status'=>1, 'message' => 'Course edited successfully']);
     }
 
     protected function active(Request $request)
