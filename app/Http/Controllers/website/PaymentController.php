@@ -61,6 +61,7 @@ class PaymentController extends Controller
                 'chapter_id' => $item->chapter_id,
                 'course_id' => $item->course_id,
                 'rzp_order_id' => $razorpayOrder['id'],
+                'payment_status' => 'pending',
             ]);
         }
         
