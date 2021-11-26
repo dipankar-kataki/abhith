@@ -80,7 +80,7 @@
                                     </td>
                                     <td>
                                         <a href="{{ route('admin.edit.banner', ['id' => \Crypt::encrypt($item->id)]) }}"
-                                            class="btn btn-gradient-primary btn-rounded btn-icon anchor_rounded">
+                                            class="btn btn-gradient-primary btn-rounded btn-icon anchor_rounded" title="Edit">
                                             <i class="mdi mdi-pencil-outline"></i>
                                         </a>
                                     </td>

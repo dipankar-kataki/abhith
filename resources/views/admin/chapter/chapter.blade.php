@@ -138,6 +138,8 @@
             toastr.error('Chapter name is required');
         }else if(cPrice.length == 0){
             toastr.error('Chapter price is required');
+        }else if(cPrice >9999){
+            toastr.error('Chapter price should not be greater than 9999');
         }else if(/^(\d+)(\.)?(\d+)?$/.test(cPrice) == false){
             toastr.error('Chapter price should be natural number or a decimal number');
         }else{
