@@ -190,11 +190,9 @@
                     allPrice = parseFloat(allPrice) + parseFloat($(this).attr("data-price"));
                     chapterId.push($(this).data('id'));
                     $('#total_price').html('<i class="fa fa-inr" aria-hidden="true"></i>' + allPrice)
-                    console.log($(this).attr("data-price"));
                     $('#add_cart').prop('disabled', false)
                     $("#add_cart").css("background-color", "#3ac162");
                 });
-                console.log(parseFloat(allPrice))
             } else {
                 $(checkboxItem).each(function() {
                     this.checked = false;
@@ -211,13 +209,14 @@
 
         $(checkboxItem).change(function() {
             if (this.checked) {
-                allPrice = parseFloat(allPrice) + parseFloat($(this).attr("data-price"));
+                allPrice = (parseFloat(allPrice) + parseFloat($(this).attr("data-price"))).toFixed(2);
                 chapterId.push($(this).data('id'));
                 $('#total_price').html('<i class="fa fa-inr" aria-hidden="true"></i>' + allPrice)
                 $('#add_cart').prop('disabled', false)
                 $("#add_cart").css("background-color", "#3ac162");
+                console.log(allPrice);
             } else {
-                allPrice = parseFloat(allPrice) - parseFloat($(this).attr("data-price"));
+                allPrice = (parseFloat(allPrice) - parseFloat($(this).attr("data-price"))).toFixed(2);
                 let itemName = $(this).attr('data-name');
                 let indexOf = chapterId.indexOf($(this).data('id'));
                 if (indexOf > -1) {

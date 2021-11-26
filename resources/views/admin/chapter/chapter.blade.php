@@ -47,7 +47,7 @@
                             @if (!$chapters->isEmpty())
                                 <th>
                                     <button type="button" class="btn btn-success editChapterBtn">Edit</button>
-                                    <button type="button" class="btn btn-warning cancelEditChapterBtn" style="display:none;">Cancel Edit</button>
+                                    <button type="button" class="btn btn-warning cancelEditChapterBtn" style="display:none;color:black;">Cancel Edit</button>
                                 </th>
                             @endif
                         </tr>
