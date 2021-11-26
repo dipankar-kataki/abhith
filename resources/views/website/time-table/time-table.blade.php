@@ -37,10 +37,13 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                        @php
+                                            $i = 1;
+                                        @endphp
                                         @forelse ($time_data as $key => $item)
                                             @foreach ($item as $key2 => $item2)
                                                 <tr>
-                                                    <td>{{$key2 + 1}}</td>
+                                                    <td>@php echo $i; @endphp</td>
                                                     <td>{{$item2['course']['name']}}</td>
                                                     <td>{{$item2['chapter']['name']}}</td>
                                                     <td>{{$item2['date']}}</td>
@@ -53,6 +56,7 @@
                                                         @endif
                                                     </td>
                                                 </tr>
+                                                @php $i++; @endphp
                                             @endforeach
                                         @empty
                                             <tr class="text-center">
@@ -65,7 +69,9 @@
                                                     @endguest
                                                 </td>
                                             </tr>
+                                            
                                         @endforelse
+                                        
                                 </tbody>
                             </table>
                         </div>
