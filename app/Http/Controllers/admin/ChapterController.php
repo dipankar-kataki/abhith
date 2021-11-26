@@ -13,7 +13,7 @@ class ChapterController extends Controller
     protected function index($id){
         $course_id = \Crypt::decrypt($id);
 
-        $chapters = Chapter::where('course_id',$course_id)->where('is_activate',Activation::Activate)->simplePaginate(5);
+        $chapters = Chapter::where('course_id',$course_id)->where('is_activate',Activation::Activate)->orderBy('created_at','DESC')->simplePaginate(5);
 
         return view('admin.chapter.chapter', \compact('course_id', 'chapters'));
     }
@@ -27,8 +27,6 @@ class ChapterController extends Controller
         $checkChapterName = Chapter::where('course_id',$course_id)->where('name', $request->name)->exists();
 
         foreach($request->price as $key => $price){
-
-            // dd($request->price[$key] );
             if($request->price[$key] > 9999){
                 $request->session()->flash('error', 'Chapter price should not be greater than 9999');
                 return redirect()->back();
