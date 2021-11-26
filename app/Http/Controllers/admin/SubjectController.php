@@ -28,7 +28,7 @@ class SubjectController extends Controller
         Subject::create([
             'name' => $request->name
         ]);
-
+        $request->session()->flash('subject_created','Subject created successfully');
         return \redirect()->back();
     }
 

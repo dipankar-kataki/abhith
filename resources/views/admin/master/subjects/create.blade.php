@@ -21,3 +21,11 @@
   </div>
 @endsection
 
+@section('scripts')
+  @if(session('subject_created'))
+    <script>
+        toastr.success("{!! session('subject_created') !!}");
+    </script>
+  @endif
+
+@endsection
