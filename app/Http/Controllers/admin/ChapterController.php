@@ -20,10 +20,21 @@ class ChapterController extends Controller
 
     protected function create(Request $request)
     {
+        
         # code...
         $course_id = \Crypt::decrypt($request->id);
 
         $checkChapterName = Chapter::where('course_id',$course_id)->where('name', $request->name)->exists();
+
+        foreach($request->price as $key => $price){
+
+            // dd($request->price[$key] );
+            if($request->price[$key] > 9999){
+                $request->session()->flash('error', 'Chapter price should not be greater than 9999');
+                return redirect()->back();
+            }
+        }
+
         if($checkChapterName == true){
             $request->session()->flash('error', 'Chapter name already exists');
             return redirect()->back();
