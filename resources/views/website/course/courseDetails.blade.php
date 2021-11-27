@@ -251,6 +251,7 @@
                         'chapter_id': chapterId,
                     },
                     success: function(result) {
+                        console.log(result);
                         if(result.status == 1){
                             toastr.success(result.message);
                         }else{

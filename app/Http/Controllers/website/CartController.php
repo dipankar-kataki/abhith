@@ -27,22 +27,40 @@ class CartController extends Controller
     }
 
     public function addToCart(Request $request){
+
         $course_id = $request->course_id;
         $chapter_id = $request->chapter_id;
 
-       $check_item_exists_inside_cart = Cart::where('user_id', Auth::user()->id)->where('chapter_id', $chapter_id)->where([['is_paid','=', 0], ['is_remove_from_cart','=', 0]])->exists();
-       if($check_item_exists_inside_cart == true){
-            return response()->json(['message' => 'Item Already present inisde cart. Please check cart', 'status' => 2]);
-       }else{
-            foreach($chapter_id as $item){
+        foreach($chapter_id as $key => $item){
+            $check_item_exists_inside_cart = Cart::where('user_id', Auth::user()->id)->where('chapter_id', $chapter_id[$key])->where([['is_paid','=', 0], ['is_remove_from_cart','=', 0]])->exists();
+            if($check_item_exists_inside_cart == true){
+                return response()->json(['message' => "Chapter already exists inside cart.", 'status' => 1]);;
+            }else{
                 $create = Cart::create([
                     'user_id' => Auth::user()->id,
                     'course_id' => $course_id,
                     'chapter_id' => $item
-                ]);    
-            }
-            return response()->json(['message' => "Item added to cart successfully." , 'status' => 1]);
-       }
+                ]);
+                
+            } 
+        }
+
+        return response()->json(['message' => "Item added to cart successfully." , 'status' => 1]);
+
+
+    //    $check_item_exists_inside_cart = Cart::where('user_id', Auth::user()->id)->where('chapter_id', $chapter_id)->where([['is_paid','=', 0], ['is_remove_from_cart','=', 0]])->exists();
+    //    if($check_item_exists_inside_cart == true){
+    //         return response()->json(['message' => 'Item Already present inisde cart. Please check cart', 'status' => 2]);
+    //    }else{
+    //         foreach($chapter_id as $item){
+    //             $create = Cart::create([
+    //                 'user_id' => Auth::user()->id,
+    //                 'course_id' => $course_id,
+    //                 'chapter_id' => $item
+    //             ]);    
+    //         }
+    //         return response()->json(['message' => "Item added to cart successfully." , 'status' => 1]);
+    //    }
     }
 
 
