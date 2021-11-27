@@ -34,7 +34,7 @@ class CartController extends Controller
         foreach($chapter_id as $key => $item){
             $check_item_exists_inside_cart = Cart::where('user_id', Auth::user()->id)->where('chapter_id', $chapter_id[$key])->where([['is_paid','=', 0], ['is_remove_from_cart','=', 0]])->exists();
             if($check_item_exists_inside_cart == true){
-                return response()->json(['message' => "Chapter already exists inside cart.", 'status' => 1]);;
+                return response()->json(['message' => "Chapter already exists inside cart."]);;
             }else{
                 $create = Cart::create([
                     'user_id' => Auth::user()->id,
