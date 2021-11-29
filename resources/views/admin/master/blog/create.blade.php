@@ -130,6 +130,7 @@
                     },
                     200: function(data) {
                         // $('#bannerForm').trigger("reset");
+                        toastr.success(data.message);
                         location.reload();
 
                         // alert('200 status code! success');

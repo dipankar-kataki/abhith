@@ -64,7 +64,7 @@ class BlogController extends Controller
             'blog' => \ConsoleTVs\Profanity\Builder::blocker($blog, BadWords::badWordsReplace)->strictClean(false)->filter(),
         ]);
 
-        return \response()->json(['status'=>1]);
+        return \response()->json(['status'=>1,'message' => 'Blog created successfully']);
     }
 
     protected function active(Request $request) {
