@@ -64,10 +64,12 @@
                                         <div class="blog-desc">
                                             <span class="icon-Calender-09 calendar-icon"></span><span>{{\Carbon\Carbon::parse($item->created_at)->format('F d, Y')}}</span>
                                             <div class="block-ellipsis1">
-                                                <h4 class="small-heading-black">{{$item->name}}</h4>
+                                                <h4 class="small-heading-black">
+                                                    {!! Illuminate\Support\Str::limit(strip_tags($item->name), $limit = 100, $end = '...') !!}</h4>
                                             </div>
                                             <div class="block-ellipsis2 ">
-                                                {!!$item->blog!!}
+                                                {!! Illuminate\Support\Str::limit(strip_tags($item->blog), $limit = 100, $end = '...') !!}
+                                                {{-- {!!$item->blog!!} --}}
                                                 {{-- {{ \Illuminate\Support\Str::limit(strip_tags($item->blog), 100) }}
                                                 {!! strlen(strip_tags($item->blog)) > 100 ? "<p class='mt-3'><b>ReadMore...</b></p>" : "" !!}  --}}
                                             </div>
