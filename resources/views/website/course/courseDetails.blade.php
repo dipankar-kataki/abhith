@@ -29,6 +29,15 @@
                 <div class="col-lg-6 p0">
                     <div class="subheader1-img">
                         <img src="{{ asset($course->course_pic) }}" class="w100">
+                        {{-- @if ($course->course_pic != null)
+                            <img src="{{ asset($course->course_pic) }}" class="w100">
+                        @else
+                            <img src="{{ asset($course->course_pic) }}" class="w100" style="opacity: 0.6">                            
+                            <a href="{{asset('asset_website/videoplayback.mp4')}}" data-fancybox="images"
+                                data-fancybox-group='image-gallery'>
+                                <i class="fas fa-play-circle"></i>
+                            </a> 
+                        @endif --}}
                     </div>
                 </div>
             </div>
