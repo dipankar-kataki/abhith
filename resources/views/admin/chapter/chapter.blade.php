@@ -44,6 +44,7 @@
                             <th>#</th>
                             <th>Chapter Name</th>
                             <th>Price</th>
+                            <th>Status</th>
                             @if (!$chapters->isEmpty())
                                 <th>
                                     <button type="button" class="btn btn-success editChapterBtn">Edit</button>
@@ -59,6 +60,19 @@
                                 </td>
                                 <td class="footable-first-visible" style="width: 40%; display: table-cell;">
                                     <input type="text" name="price"  placeholder="Enter Price" class="form-control name_list chapterPrice" id="cprice_{{$item->id}}" pattern="\d+(\.)?(\d)?" title="Value should be a format of price. E.g 22 or 22.9" value="{{$item->price}}" required>
+                                </td>
+                                <td>
+                                    @if ($item->is_activate == 1)
+                                        <label class="switch">
+                                            <input type="checkbox" id="chapterVisibilityUpdate" data-id="{{$item->id}}" checked>
+                                            <span class="slider round"></span>
+                                        </label>
+                                    @else
+                                        <label class="switch">
+                                            <input type="checkbox" id="chapterVisibilityUpdate" data-id="{{$item->id}}">
+                                            <span class="slider round"></span>
+                                        </label>
+                                    @endif
                                 </td>
                                 <td class="footable-last-visible" style="display: table-cell;">
                                     <button type="button" name="add"  class="btn btn-success updateChapterBtn" data-id="{{$item->id}}" data-name="" data-price="{{$item->price}}" style="display:none;">Update</button>
@@ -114,6 +128,7 @@
         $('.updateChapterBtn').css('display','block');
         $('.chapterName').attr('disabled',false);
         $('.chapterPrice').attr('disabled',false);
+
     });
 
     $('.cancelEditChapterBtn').on('click',function(e){
@@ -168,6 +183,32 @@
        
         // alert($(this).data('id'));
     })
+
+
+    $(document.body).on('change', '#chapterVisibilityUpdate', function() {
+        let status = $(this).prop('checked') == true ? 1 : 0;
+        let chapter = $(this).data('id');
+        let formData = {
+            'chapter': chapter,
+            'active': status
+        }
+        $.ajax({
+            type: "post",
+
+            url: "{{route('admin.change.visibility.chapter') }}",
+            data: formData,
+
+            success: function(result) {
+                toastr.success(result.message)
+                location.reload(true);
+            },
+            error:function(xhr, status, error){
+                if(xhr.status == 500 || xhr.status == 422){
+                    toastr.error('Oops! Something went wrong while changing status.');
+                }
+            }
+        });
+    });
       
    
 

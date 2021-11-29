@@ -78,4 +78,18 @@ class ChapterController extends Controller
             return response()->json(['message' =>   'Something went wrong']);
         }
     }
+
+
+    public function changeChapterVisibility(Request $request){
+        $chapter = $request->chapter;
+        $status = $request->active;
+        Chapter::where('id',$chapter)->update([
+            'is_activate' =>  $status
+        ]);
+        if($status == 0){
+            return response()->json(['message' => 'Chapter visibility updated from show to hide']);
+        }else{
+            return response()->json(['message' => 'Chapter visibility updated from hide to show']);
+        }
+    }
 }

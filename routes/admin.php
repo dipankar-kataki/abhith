@@ -52,6 +52,7 @@ Route::prefix('chapter')->group(function () {
     // Route::view('create', 'admin.course.create')->name('admin.create.course');
     Route::post('creating',[ChapterController::class,'create'])->name('admin.creating.chapter');
     Route::post('editChapter',[ChapterController::class,'editChapter'])->name('admin.edit.chapter');
+    Route::post('changeChapterVisibility',[ChapterController::class,'changeChapterVisibility'])->name('admin.change.visibility.chapter');
 
 });
 
