@@ -25,7 +25,7 @@
             </div>
             <div class="col-lg-5 p0">
                 <ul class="list-inline course-btn-list">
-                    <li>
+                    {{-- <li>
                         <div class="course-select">
                             <div class="selectBtn" data-type="planningStage">Subjects</div>
                             <div class="selectDropdown">
@@ -37,7 +37,7 @@
                         </div>
                     </li>
                     <li><input type="text" class="form-control" id="myInput" onkeyup="myFunction()" placeholder="Search Course">
-                    </li>
+                    </li> --}}
                 </ul>
             </div>
             <div class="col-lg-12 p-0">
@@ -48,7 +48,7 @@
                         <div class="course-desc"><span class="icon-clock-09 clock-icon"></span><span>{{$item['duration']}}</span>
                             <div class="block-ellipsis5"><h4 class="small-heading-black">{{$item['name']}}</h4></div>
                             <span>₹{{$item['final_price']}}</span>
-                            <a href="{{route('website.course.details',['id'=>\Crypt::encrypt($item['id'])])}}"  class="enroll">Enroll now</a>
+                            <a href="{{route('website.course.details',['id'=>\Crypt::encrypt($item['id'])])}}"  class="enroll">Enroll Now</a>
                         </div>
                     </li>
 
