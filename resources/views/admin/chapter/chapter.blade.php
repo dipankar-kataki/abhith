@@ -199,8 +199,7 @@
             data: formData,
 
             success: function(result) {
-                toastr.success(result.message)
-                location.reload(true);
+                toastr.success(result.message);
             },
             error:function(xhr, status, error){
                 if(xhr.status == 500 || xhr.status == 422){
