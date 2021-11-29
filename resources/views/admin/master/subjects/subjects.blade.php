@@ -61,7 +61,11 @@
 
                     </tbody>
                 </table>
+                <div style="float:right;margin-top:10px;">
+                    {{$subjects->links()}}
+                </div>
             </div>
+
         </div>
     </div>
 @endsection
