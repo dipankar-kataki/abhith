@@ -36,7 +36,7 @@
                     <tbody>
                         @foreach ($subjects as $key => $item)
                             <tr>
-                                <td> {{ $key + 1 }} </td>
+                                <td> {{ $subjects->firstItem() + $key}} </td>
                                 <td> {{ $item->name }} </td>
                                 <td>
                                     @if ($item->is_activate == 1)
