@@ -12,7 +12,7 @@ class GalleryController extends Controller
     //
     protected function index()
     {
-        $gallerries = Gallery::paginate(10);
+        $gallerries = Gallery::orderBy('created_at','DESC')->paginate(10);
         return view('admin.master.gallery.gallery', \compact('gallerries'));
     }
 
