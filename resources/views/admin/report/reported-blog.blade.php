@@ -30,7 +30,10 @@
                         @forelse ($reportedBlogs as $key => $item)
                             <tr>
                                 <td> {{ $reportedBlogs->firstItem() + $key }} </td>
-                                <td>{{ $item->blogs->name }}</td>
+                                <td>
+                                    <a href="{{route('website.blog.details',['id'=>\Crypt::encrypt($item->blogs_id)])}}" target="_blank">
+                                        {{ $item->blogs->name }}</td>
+                                    </a>
                                 <td>{{ $item->report_count }}</td>
                                 <td>
                                     @php 

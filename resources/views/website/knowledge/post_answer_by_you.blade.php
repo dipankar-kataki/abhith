@@ -13,9 +13,11 @@
                 class="post-link">{{ $answer->knowledgeForumPost->links }}</a>
             <div class="answer-btn-box">
                 <ul class="list-inline answer-btn-list">
-                    <li><a
-                            href="{{ route('website.knowledge.details.post', ['id' => $encrypt_id]) }}">{{ $answer->knowledgeForumPost->total_comments }}
-                            Comment</a></li>
+                    <li>
+                        <a href="{{ route('website.knowledge.details.post', ['id' => $encrypt_id]) }}">
+                            {{ $answer->knowledgeForumPost->total_comments }}
+                            Comment</a>
+                    </li>
                     <li><a href="javascript:void(0)">{{ $answer->knowledgeForumPost->total_views }}
                             Views</a></li>
                 </ul>

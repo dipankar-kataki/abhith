@@ -31,7 +31,11 @@
                             @forelse ($reportedPosts as $key => $item)
                                 <tr>
                                     <td> {{ $key + 1 }} </td>
-                                    <td id="postId">{{ $item->knowledgeForumPost->question }}</td>
+                                    <td id="postId">
+                                        <a href="{{route('website.knowledge.details.post',['id' => Crypt::encryptString($item->knowledge_forum_post_id)])}}" target="_blank">
+                                            {{ $item->knowledgeForumPost->question }}                                       
+                                        </a>
+                                    </td>     
                                     <td>{{ $item->report_count }}</td>
                                     <td>
                                         @php 
