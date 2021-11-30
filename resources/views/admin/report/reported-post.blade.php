@@ -23,6 +23,7 @@
                                 <th> # </th>
                                 <th> Post Name </th>
                                 <th>Number Of Reports</th>
+                                <th>Report Reason</th>
                                 <th> Action </th>
                             </tr>
                         </thead>
@@ -32,6 +33,12 @@
                                     <td> {{ $key + 1 }} </td>
                                     <td id="postId">{{ $item->knowledgeForumPost->question }}</td>
                                     <td>{{ $item->report_count }}</td>
+                                    <td>
+                                        @php 
+                                            $all_reason = implode(', ', array_unique($item->report_reason)); 
+                                            echo $all_reason;
+                                        @endphp
+                                    </td>
                                     <td>
                                         @if ($item->is_activate == 1)
                                             <label class="switch">
@@ -83,6 +90,7 @@
                 data: formData,
 
                 success: function(result) {
+                    // console.log(result);
                     toastr.success(result.success)
                 },
                 error:function(xhr, status, error){

@@ -12,7 +12,11 @@ class ReportPost extends Model
     use SoftDeletes;
 
     protected $table = 'report_posts';
-    protected $fillable = ['knowledge_forum_post_id','report_count'];
+    protected $fillable = ['knowledge_forum_post_id','report_count','report_reason','is_activate'];
+
+    protected $casts = [
+        'report_reason' => 'array'
+    ];
 
 
     public function knowledgeForumPost(){
