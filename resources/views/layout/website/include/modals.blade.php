@@ -225,14 +225,18 @@
         <div class="modal-content">
             <!-- Modal body -->
             <div class="modal-body">
-                <div class="text-center">
+                <div class="form-group">
+                    <label for="">Reason of reporting ?</label>
+                    <input type="text" class="form-control" placeholder="Enter reason of reporting.">
+                </div>
+                {{-- <div class="text-center">
                     <h5>Are you sure ?</h5>
                     <a href="#" class="close" data-dismiss="modal">&times;</a>
                 </div>
                 <div style="float:right;" class="mt-3">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-danger reportPostButton">Yes, Report</button>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
@@ -244,14 +248,33 @@
         <div class="modal-content">
             <!-- Modal body -->
             <div class="modal-body">
-                <div class="text-center">
+                <div class="form-group text-center">
+                    <h5>Report This Blog.</h5>
+                </div>
+                <div class="form-group">
+                    <label for="">Enter reason of reporting.</label>
+                    <select name="reason_of_report" class="form-control" id="reason_of_report">
+                        <option selected disabled>-- select --</option>
+                        <option value="Inappropriate">Inappropriate</option>
+                        <option value="Abusive">Abusive</option>
+                        <option value="Provoking">Provoking</option>
+                        <option value="Violence">Violence</option>
+                        <option value="Harassment">Harassment</option>
+                        <option value="Hate speech">Hate speech</option>
+                    </select>
+                </div>
+                <div style="float:right;" class="form-group">
+                    <button type="button" class="btn btn-default close-blog-modal" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger reportBlogButton">Yes, Report</button>
+                </div>
+                {{-- <div class="text-center">
                     <h5>Are you sure ?</h5>
                     <a href="#" class="close" data-dismiss="modal">&times;</a>
                 </div>
                 <div style="float:right;" class="mt-3">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     <button type="button" class="btn btn-danger reportBlogButton">Yes, Report</button>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>

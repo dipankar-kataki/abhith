@@ -22,6 +22,7 @@
                             <th> # </th>
                             <th> Blog Name </th>
                             <th>Number Of Reports</th>
+                            <th>Report Reason</th>
                             <th> Action </th>
                         </tr>
                     </thead>
@@ -31,6 +32,12 @@
                                 <td> {{ $reportedBlogs->firstItem() + $key }} </td>
                                 <td>{{ $item->blogs->name }}</td>
                                 <td>{{ $item->report_count }}</td>
+                                <td>
+                                    @php 
+                                        $all_reason = implode(', ', array_unique($item->report_reason)); 
+                                        echo $all_reason;
+                                    @endphp
+                                </td>
                                 <td>
                                     @if ($item->is_activate == 1)
                                         <label class="switch">

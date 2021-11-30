@@ -10,23 +10,36 @@ use App\Models\ReportBlog;
 class ReportBlogController extends Controller
 {
     public function reportBlog(Request $request){
-       $blogId = $request->blogId;
-       $getBlog = Blog::where('id', $blogId)->first();
-       $insertReportedBlog = ReportBlog::where('blogs_id',$blogId)->first();
+        $blogId = $request->blogId;
+        $reason_of_report = $request->reason_of_report;
 
-       if($insertReportedBlog == null){
+
+        $getBlog = Blog::where('id', $blogId)->first();
+        $insertReportedBlog = ReportBlog::where('blogs_id',$blogId)->first();
+
+        $reasons = [];
+        $new_array_reason = [];
+        array_push($reasons,$reason_of_report);
+
+        if($insertReportedBlog != null){
+            $new_array_reason =  array_merge($reasons, $insertReportedBlog->report_reason);
+        }
+
+        if($insertReportedBlog == null){
             ReportBlog::create([
                 'blogs_id' => $blogId,
                 'report_count' => 1,
+                'report_reason' => $reasons ,
                 'is_activate' => $getBlog->is_activate,
             ]);
-       }else{
+        }
+        else{
             ReportBlog::where('blogs_id' ,$blogId)->update([
                 'report_count' => $insertReportedBlog->report_count + 1,
+                'report_reason' => $new_array_reason
             ]);
-       }
-
-       return response()->json(['success' => 'Blog reported successfully.']);
+        }
+        return response()->json(['success' => 'Blog reported successfully.']);
     }
 
 

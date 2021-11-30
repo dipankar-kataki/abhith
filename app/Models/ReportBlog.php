@@ -10,9 +10,11 @@ class ReportBlog extends Model
     use HasFactory;
 
     protected $table = 'report_blogs';
-    protected $fillable = ['blogs_id','report_count', 'is_activate'];
+    protected $fillable = ['blogs_id','report_count', 'report_reason', 'is_activate'];
 
-
+    protected $casts = [
+        'report_reason' => 'array'
+    ];
     public function blogs(){
         return $this->belongsTo('App\Models\Blog');
     }

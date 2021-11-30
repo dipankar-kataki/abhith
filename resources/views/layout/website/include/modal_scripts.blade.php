@@ -209,23 +209,36 @@
         /***************************** Report Blog Modal **************************/
         $('.reportBlogModal').click(function(){
             let blogId = $(this).data('id');
+
+            $('.close-blog-modal').on('click',function(){
+                $('#reason_of_report').prop('selectedIndex',0);
+            })
+
             $('.reportBlogButton').on('click',function(e){
                 e.preventDefault();
-                $.ajax({
-                    url:"{{route('website.blog.report')}}",
-                    type:'POST',
-                    data:{ '_token': '{{ csrf_token() }}','blogId' : blogId},
-                    success:function(result){
-                        toastr.success(result.success);
-                        $('#ReportBlogModal').modal('hide');
-                        location.reload(true);
-                    },
-                    error:function(xhr, status, error){
-                        if(xhr.status == 500 || xhr.status == 422){
-                            toastr.error('Oops! Something went wrong while reporting.');
+
+                let reason_of_report = $('#reason_of_report').val();
+                if(reason_of_report == null || reason_of_report.length == 0){
+                    toastr.error('Reason of reporting is required. Please select one from the dropdown');
+                }else{
+                    $.ajax({
+                        url:"{{route('website.blog.report')}}",
+                        type:'POST',
+                        data:{ '_token': '{{ csrf_token() }}','blogId' : blogId, 'reason_of_report' : reason_of_report},
+                        success:function(result){
+                            // console.log(result);
+                            toastr.success(result.success);
+                            $('#ReportBlogModal').modal('hide');
+                            $('#reason_of_report').prop('selectedIndex',0);
+                            location.reload(true);
+                        },
+                        error:function(xhr, status, error){
+                            if(xhr.status == 500 || xhr.status == 422){
+                                toastr.error('Oops! Something went wrong while reporting.');
+                            }
                         }
-                    }
-                });
+                    });
+                }
             });
         });
 
