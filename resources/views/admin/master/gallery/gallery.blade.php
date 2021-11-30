@@ -37,7 +37,7 @@
                     <tbody>
                         @foreach ($gallerries as $key => $item)
                         <tr>
-                            <td>{{ $key + 1 }}</td>
+                            <td>{{ $gallerries->firstItem() + $key }}</td>
                             <td>{{ $item->name }}</td>
                             <td>
                                 <img src="{{ asset($item->gallery) }}" alt="" srcset="">
