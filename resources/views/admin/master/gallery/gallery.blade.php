@@ -68,6 +68,9 @@
 
                     </tbody>
                 </table>
+                <div style="float:right;margin-top:10px;">
+                    {{$gallerries->links()}}
+                </div>
             </div>
         </div>
     </div>
