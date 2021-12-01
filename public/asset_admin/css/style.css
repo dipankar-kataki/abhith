@@ -13654,15 +13654,12 @@ input:checked + .slider:before {
 }
 
 
-.video-upload-div{
+.video-section{
   height:75px;
   border-radius: 10px;
   background-color: #f1f0ef;
 }
-.video-upload-div input{
-  position:absolute;
-  top:31%;
-  left:50%;
-  transform:translate(-31%,-50%);
-  box-sizing: border-box;
+.video-section input{
+  margin-left: 50px;
+  margin-top: 25px;
 }

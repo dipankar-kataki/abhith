@@ -23,7 +23,7 @@ class CourseController extends Controller
 
     protected function create(Request $request)
     {
-
+        // return response($request->course_video_thumbnail);
         # code...
         $this->validate($request,[
             'name' => 'required',
@@ -53,23 +53,26 @@ class CourseController extends Controller
                 $video = $request->video;
                 $imgFile = '';
                 $videoFile = '';
+                // $videoThumbnailFile = '';
                 $checkCourseName = Course::where('name','like','%'.$request->name.'%')->where('subject_id',$request->subject_id)->exists();
                 if( $checkCourseName == true){
                     return response()->json(['error' => 'Oops! Chapter name already exists under this course name', 'status' => 2]);
                 }else{
                     
-                    if (isset($document) && !empty($document)) {
+                    if ( $request->hasFile('pic') &&  $request->hasFile('video') ) {
                         $new_img_name = date('d-m-Y-H-i-s') . '_' . $document->getClientOriginalName();
-                        // $new_name = '/images/'.$image.'_'.date('d-m-Y-H-i-s');
                         $document->move(public_path('/files/course/'), $new_img_name);
                         $imgFile = 'files/course/' . $new_img_name;
-                    }else if(isset($video) && !empty($video)){
+    
                         $new_video_name = date('d-m-Y-H-i-s') . '_' . $video->getClientOriginalName();
-                        // $new_name = '/images/'.$image.'_'.date('d-m-Y-H-i-s');
-                        $video->move(public_path('/files/course/'), $new_video_name);
-                        $videoFile = 'files/course/' . $new_video_name;
+                        $video->move(public_path('/files/course/courseVideo/'), $new_video_name);
+                        $videoFile = 'files/course/courseVideo/' . $new_video_name;
+                    }else if( $request->hasFile('pic') ){
+                        $new_img_name = date('d-m-Y-H-i-s') . '_' . $document->getClientOriginalName();
+                        $document->move(public_path('/files/course/'), $new_img_name);
+                        $imgFile = 'files/course/' . $new_img_name;
                     }else{
-                        return response()->json(["status"=>1,'error'=>'Image or Video is required']);
+                        return response()->json(["status"=>2,'error'=>'Image or Video is required']);
                     }
 
                     Course::create([
@@ -93,16 +96,21 @@ class CourseController extends Controller
             }else{
                 $document = $request->pic;
                 $video = $request->video;
-                if (isset($document) && !empty($document)) {
+                // $video_thumbnail = $request->course_video_thumbnail;
+
+
+                if ( $request->hasFile('pic') &&  $request->hasFile('video') ) {
                     $new_img_name = date('d-m-Y-H-i-s') . '_' . $document->getClientOriginalName();
-                    // $new_name = '/images/'.$image.'_'.date('d-m-Y-H-i-s');
                     $document->move(public_path('/files/course/'), $new_img_name);
                     $imgFile = 'files/course/' . $new_img_name;
-                }else if(isset($video) && !empty($video)){
+
                     $new_video_name = date('d-m-Y-H-i-s') . '_' . $video->getClientOriginalName();
-                    // $new_name = '/images/'.$image.'_'.date('d-m-Y-H-i-s');
-                    $video->move(public_path('/files/course/'), $new_video_name);
-                    $videoFile = 'files/course/' . $new_video_name;
+                    $video->move(public_path('/files/course/courseVideo/'), $new_video_name);
+                    $videoFile = 'files/course/courseVideo/' . $new_video_name;
+                }else if(  $request->hasFile('pic') ){
+                    $new_img_name = date('d-m-Y-H-i-s') . '_' . $document->getClientOriginalName();
+                    $document->move(public_path('/files/course/'), $new_img_name);
+                    $imgFile = 'files/course/' . $new_img_name;
                 }else{
                     return response()->json(["status"=>2,'error'=>'Image or Video is required']);
                 }
@@ -112,6 +120,7 @@ class CourseController extends Controller
                     'subject_id' => $request->subject_id,
                     'course_pic' => $imgFile,
                     'course_video' => $videoFile,
+                    'course_video_thumbnail' => $videoThumbnailFile,
                     'durations' => $request->duration.' '.$request->duration_type,
                     'publish_date' => Carbon::parse($request->publish_date.$request->publish_time)->format('Y-m-d H:i:s'),
                     'time' => Carbon::parse($request->publish_time)->format('H:i:s'),

@@ -1,5 +1,28 @@
 @extends('layout.website.website')
+@section('head')
+    <link href="{{ asset('asset_website/css/jquery.fancybox.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    <style>
+        .subheader1-img{
+            position: relative;
+        }
+
+        .fa-play-circle{
+            font-size: 5rem;
+            color: #fff;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            transition: 0.2s all;
+        }
+
+        .fa-play-circle:hover{
+            color: #111;
+        }
+    </style>
+@endsection
 @section('content')
     <section class="subheader1">
         <div class="container-fluid">
@@ -28,16 +51,15 @@
                 </div>
                 <div class="col-lg-6 p0">
                     <div class="subheader1-img">
-                        <img src="{{ asset($course->course_pic) }}" class="w100">
-                        {{-- @if ($course->course_pic != null)
+                        @if ($course->course_video == null)
                             <img src="{{ asset($course->course_pic) }}" class="w100">
                         @else
                             <img src="{{ asset($course->course_pic) }}" class="w100" style="opacity: 0.6">                            
-                            <a href="{{asset('asset_website/videoplayback.mp4')}}" data-fancybox="images"
+                            <a href="{{asset($course->course_video)}}" data-fancybox="images"
                                 data-fancybox-group='image-gallery'>
-                                <i class="fas fa-play-circle"></i>
+                                <i class="fa fa-play-circle"></i>
                             </a> 
-                        @endif --}}
+                        @endif
                     </div>
                 </div>
             </div>
@@ -409,6 +431,21 @@
                     }
                 }
             });
+        });
+    </script>
+
+
+    <script src="{{ asset('asset_website/js/jquery.fancybox.js') }}"></script>
+    <script type="text/javascript">
+        $('[data-fancybox="images"]').fancybox({
+            thumbs: {
+                autoStart: true
+            }
+        });
+        $('[data-fancybox="images1"]').fancybox({
+            thumbs: {
+                autoStart: true
+            }
         });
     </script>
 @endsection

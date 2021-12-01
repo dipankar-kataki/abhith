@@ -50,8 +50,8 @@ $subjects = Subject::where('is_activate', Activation::Activate)
                     </div>
 
                     <div class="form-group">
-                        <label>File Upload</label>
-                        <div class="dropdown">
+                        {{-- <label>File Upload</label> --}}
+                        {{-- <div class="dropdown">
                             <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select File
                             <span class="caret"></span></button>
                             <ul class="dropdown-menu">
@@ -61,10 +61,21 @@ $subjects = Subject::where('is_activate', Activation::Activate)
                         </div>
                         <div class="upload-image-div" style="margin-top:15px;display: none;">
                             <input type="file" class="filepond" name="pic" id="course_pic" data-max-file-size="1MB" data-max-files="1">
-                        </div>
-                        <div class="video-upload-div" style="margin-top:15px;display: none;">
-                            <input type="file" name="video" id="course_video">
-                        </div>
+                        </div> --}}
+                        {{-- <div class="video-upload-div" style="margin-top:15px;margin-bottom:15px;display: none;"> --}}
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="">Upload Course Thumbnail <sup class="text-danger">*</sup></label>
+                                    <input type="file" class="filepond" name="pic" id="course_pic" data-max-file-size="1MB" data-max-files="1">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="">Video File ( optional )</label>
+                                    <div class="video-section">
+                                        <input type="file" name="video" id="course_video" accept="video/mp4,video/x-m4v,video/*">
+                                    </div>
+                                </div>
+                            </div>
+                        {{-- </div> --}}
                         <span class="text-danger" id="pic_error"></span>
                     </div>
                     <div class="form-group">
@@ -77,7 +88,7 @@ $subjects = Subject::where('is_activate', Activation::Activate)
                             <div class="col-md-4">
                                 <label for="exampleInputName1">Duration Type </label>
                                 <select name="duration_type" id="duration_type" class="form-control" required> 
-                                    <option  disabled selected>-- Select --</option>
+                                    <option  value = "" disabled selected>-- Select --</option>
                                     <option value="Days">Days</option>
                                     <option value="Hours">Hours</option>
                                     <option value="Weeks">Weeks</option>
@@ -169,6 +180,8 @@ $subjects = Subject::where('is_activate', Activation::Activate)
             }
         );
 
+
+
         $('#uploadVideo').on('click',function(e){
 
            $('.video-upload-div').css('display', 'block');
@@ -202,71 +215,81 @@ $subjects = Subject::where('is_activate', Activation::Activate)
                 // append the blob file
                 formdata.append('pic', pondFiles[i].file);
             }
+
+
             formdata.append('data', data);
             
             formdata.append('video',document.getElementById('course_video').files[0]);
             
        
 
-
-
-            if( (pondFiles.length == 0) && (document.getElementById('course_video').value == '')){
-                toastr.error('Image or Video must be selected from the file upload dropdown');
+            if( pondFiles.length == 0){
+                toastr.error('Course thumbnail must be selected');
             }else if($('#duration_type').val() == null){
                 toastr.error('Duration type is required');
             }else{
+                
                 $('#addCourseSubmitButton').text('Please wait');
                 $('#addCourseSubmitButton').attr('disabled', true);
 
-                $.ajax({
+                let video = document.getElementById('course_video').value;
+                let videoExtension = video.split('.').pop();
+                if(videoExtension == 'jpg' || videoExtension == 'jpeg' || videoExtension == 'png'){
+                    toastr.error('Please add video file only.');
+                    $('#addCourseSubmitButton').text('Submit');
+                    $('#addCourseSubmitButton').attr('disabled', false);
+                }else{
+                    $.ajax({
 
-                    type: "POST",
-                    url: "{{ route('admin.creating.course') }}",
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    },
-
-                    // data: form.serialize(), // serializes the form's elements.
-                    data: formdata,
-                    processData: false,
-                    contentType: false,
-                    statusCode: {
-                        422: function(data) {
-                            var errors = $.parseJSON(data.responseText);
-                            $.each(errors.errors, function(key, val) {
-                                $("#" + key + "_error").text(val[0]);
-                            });
-                            $('#addCourseSubmitButton').text('Submit');
-                            $('#addCourseSubmitButton').attr('disabled', false);
-
+                        type: "POST",
+                        url: "{{ route('admin.creating.course') }}",
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                         },
-                        200: function(data) {
 
-                            console.log(data)
-                            if (data.status == 2) {
-                                toastr["error"](data.error);
+                        // data: form.serialize(), // serializes the form's elements.
+                        data: formdata,
+                        processData: false,
+                        contentType: false,
+                        statusCode: {
+                            422: function(data) {
+                                var errors = $.parseJSON(data.responseText);
+                                $.each(errors.errors, function(key, val) {
+                                    $("#" + key + "_error").text(val[0]);
+                                });
+                                $('#addCourseSubmitButton').text('Submit');
+                                $('#addCourseSubmitButton').attr('disabled', false);
+
+                            },
+                            200: function(data) {
+
+                                console.log(data)
+                                if (data.status == 2) {
+                                    toastr["error"](data.error);
+                                    $('#addCourseSubmitButton').text('Submit');
+                                    $('#addCourseSubmitButton').attr('disabled', false);
+                                    document.getElementById('course_video').value = '';
+                                    pond.removeFile();
+
+                                } else {
+                                    toastr.success('Publish Successfull');
+                                    $('#addCourseSubmitButton').text('Submit');
+                                    $('#addCourseSubmitButton').attr('disabled', false);
+                                    location.reload();
+
+                                }
+                            },
+                            500: function() {
+                                alert('500 someting went wrong');
                                 $('#addCourseSubmitButton').text('Submit');
                                 $('#addCourseSubmitButton').attr('disabled', false);
                                 document.getElementById('course_video').value = '';
                                 pond.removeFile();
-
-                            } else {
-                                toastr.success('Publish Successfull');
-                                $('#addCourseSubmitButton').text('Submit');
-                                $('#addCourseSubmitButton').attr('disabled', false);
-                                location.reload();
-
                             }
-                        },
-                        500: function() {
-                            alert('500 someting went wrong');
-                            $('#addCourseSubmitButton').text('Submit');
-                            $('#addCourseSubmitButton').attr('disabled', false);
-                            document.getElementById('course_video').value = '';
-                            pond.removeFile();
                         }
-                    }
-                });
+                    });
+                }
+                
             }
             
 

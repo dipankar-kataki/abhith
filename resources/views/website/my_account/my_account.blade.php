@@ -86,7 +86,7 @@
                                     <h4 class="small-heading-black">Profile</h4>
                                 </div>
                                 <div class="col-lg-6 col-6 text-right ">
-                                    <a class="btn btn-default edit-btn" href="#">Edit Profile</a>&nbsp;
+                                    <a class="btn btn-default edit-btn" href="#" style="border: 1px solid #bbb6b6;">Edit Profile</a>&nbsp;
                                     <a class="btn btn-warning cancel-edit-btn" href="#">Cancel Edit</a>
                                 </div>
                                 @if($user_details != null)
@@ -354,7 +354,7 @@
                                                 <td>{{$item->course->name}}</td>
                                                 <td>{{$item->chapter->name}}</td>
                                                 <td>{{$item->chapter->price}}</td>
-                                                <td>{{$item->updated_at->format('d, M Y') }}</td>
+                                                <td>{{$item->updated_at->format('d-M-Y') }}</td>
                                             </tr>
                                         @empty
                                             <tr>
