@@ -52,7 +52,7 @@
                                                         @if ($item2['zoom_link'] == null)
                                                             <p>Link not given</p>
                                                         @else
-                                                            <a href="{{$item2['zoom_link']}}" style="color:green" target="blank">Join Class</a>
+                                                            <a href="{{$item2['zoom_link']}}" style="color:green" target="_blank">Join Class</a>
                                                         @endif
                                                     </td>
                                                 </tr>
