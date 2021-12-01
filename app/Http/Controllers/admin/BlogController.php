@@ -88,7 +88,7 @@ class BlogController extends Controller
         $main_id = \Crypt::decrypt($request->id);
 
         $blog = Blog::find($main_id);
-
+        
         return view('admin.master.blog.edit',\compact('blog'));
 
     }

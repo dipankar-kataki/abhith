@@ -22,21 +22,21 @@
                     <div class="form-group">
                         <label for="exampleInputName1">Name</label>
                         <input type="text" class="form-control" id="name" name="name" value="{{$blog->name}}"
-                            placeholder="Enter Blog Name">
+                            placeholder="Enter Blog Name" required>
                         <span class="text-danger" id="name_error"></span>
                     </div>
 
                     <div class="form-group">
-                        <label>File upload</label>
+                        <label>Blog image upload</label>
                         <input type="file" class="filepond" name="pic" id="banner_pic" data-max-file-size="1MB"
-                            data-max-files="1" />
+                            data-max-files="1" required/>
                             <span class="text-danger" id="pic_error"></span>
 
                     </div>
 
                     <div class="form-group">
                         <label for="exampleTextarea1">Description</label>
-                        <textarea class="form-control" id="editor" name="description">{{$blog->blog}}</textarea>
+                        <textarea class="form-control" id="editor" name="description" required>{{$blog->blog}}</textarea>
                         <span class="text-danger" id="data_error"></span>
                     </div>
 
@@ -115,38 +115,41 @@
 
             formdata.append('data', data);
 
+            if(pondFiles.length == 0){
+                toastr.error('Blog image is required.');
+            }else if(data.length == 0){
+                toastr.error('Description is required.');
+            }else{
+                $.ajax({
 
-            $.ajax({
+                    type: "POST",
+                    url: "{{ route('admin.editing.blog') }}",
+                    // data: form.serialize(), // serializes the form's elements.
+                    data: formdata,
+                    processData: false,
+                    contentType: false,
+                    statusCode: {
+                        422: function(data) {
+                            var errors = $.parseJSON(data.responseText);
 
-                type: "POST",
-                url: "{{ route('admin.editing.blog') }}",
-                // data: form.serialize(), // serializes the form's elements.
-                data: formdata,
-                processData: false,
-                contentType: false,
-                statusCode: {
-                    422: function(data) {
-                        var errors = $.parseJSON(data.responseText);
+                            $.each(errors.errors, function(key, val) {
+                                $("#" + key + "_error").text(val[0]);
+                            });
 
-                        $.each(errors.errors, function(key, val) {
-                            $("#" + key + "_error").text(val[0]);
-                        });
+                        },
+                        200: function(data) {
+                            // $('#bannerForm').trigger("reset");
+                            toastr.success('Blog details updated successfully');
+                            location.reload();
 
-                    },
-                    200: function(data) {
-                        // $('#bannerForm').trigger("reset");
-                        location.reload();
-
-                        // alert('200 status code! success');
-                    },
-                    500: function() {
-                        alert('500 someting went wrong');
+                            // alert('200 status code! success');
+                        },
+                        500: function() {
+                            toastr.error('Oops! Something went wrong');
+                        }
                     }
-                }
-            });
-
-
+                });
+            }
         })
     </script>
-
 @endsection
