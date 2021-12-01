@@ -109,4 +109,6 @@ select.form-control{
 
 #add_cart{
     font-weight: 700;
+    font-size: 1rem;
+    height: 43px;
 }
