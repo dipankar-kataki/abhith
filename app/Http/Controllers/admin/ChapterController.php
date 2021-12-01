@@ -13,7 +13,7 @@ class ChapterController extends Controller
     protected function index($id){
         $course_id = \Crypt::decrypt($id);
 
-        $chapters = Chapter::where('course_id',$course_id)->orderBy('created_at','DESC')->simplePaginate(5);
+        $chapters = Chapter::where('course_id',$course_id)->orderBy('id','DESC')->simplePaginate(5);
 
         return view('admin.chapter.chapter', \compact('course_id', 'chapters'));
     }
