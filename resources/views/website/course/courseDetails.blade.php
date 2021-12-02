@@ -113,7 +113,7 @@
 
                             <div class=" course-desc-list1">
                                 <label class="box1 ">Full Course
-                                    <input type="checkbox" data-price="0.00" id="select-all">
+                                    <input type="checkbox" data-price="0.00" id="select-all" data-selected="fullCourse">
                                     <span class="checkmark"></span>
                                 </label>
                                 <h5 class="small-heading-black mt15 mb20">Select Lesson</h5>
@@ -211,11 +211,13 @@
         let checkboxItem = '.item_price';
         let chapterId = [];
         let allPrice = 0.00;
+        let is_full_course_selected = '';
+
 
         $(selectAllItems).click(function() {
             allPrice = 0.00
-
             if (this.checked) {
+                is_full_course_selected =  $(this).data('selected');
                 $(checkboxItem).each(function() {
                     this.checked = true;
                     allPrice = parseFloat(allPrice) + parseFloat($(this).attr("data-price"));
@@ -227,6 +229,7 @@
             } else {
                 $(checkboxItem).each(function() {
                     this.checked = false;
+                    is_full_course_selected = '';
                     allPrice = 0.00
                     chapterId = [];
                     $('#total_price').html('<i class="fa fa-inr" aria-hidden="true"></i>' + allPrice)
@@ -240,6 +243,7 @@
 
         $(checkboxItem).change(function() {
             if (this.checked) {
+                is_full_course_selected = '';
                 allPrice = (parseFloat(allPrice) + parseFloat($(this).attr("data-price"))).toFixed(2);
                 chapterId.push($(this).data('id'));
                 $('#total_price').html('<i class="fa fa-inr" aria-hidden="true"></i>' + allPrice)
@@ -247,6 +251,7 @@
                 $("#add_cart").css("background-color", "#3ac162");
                 console.log(allPrice);
             } else {
+                is_full_course_selected = '';
                 allPrice = (parseFloat(allPrice) - parseFloat($(this).attr("data-price"))).toFixed(2);
                 let itemName = $(this).attr('data-name');
                 let indexOf = chapterId.indexOf($(this).data('id'));
@@ -280,6 +285,7 @@
                         '_token': "{{ csrf_token() }}",
                         'course_id': "{{ $course->id }}",
                         'chapter_id': chapterId,
+                        'is_full_course_selected' : is_full_course_selected,
                     },
                     success: function(result) {
                         console.log(result);
