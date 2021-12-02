@@ -83,7 +83,8 @@ Route::prefix('master')->group(function () {
 
     /* ------------------------------- Blog ------------------------------------ */
     Route::prefix('blog')->group(function () {
-        Route::get('',[BlogController::class,'index'])->name('admin.get.blog');
+        // Route::get('',[BlogController::class,'index'])->name('admin.get.blog');
+        Route::get('blog/{id?}',[BlogController::class,'index'])->name('admin.get.blog.by.id');
         Route::view('create','admin.master.blog.create')->name('admin.create.blog');
         Route::post('creating',[BlogController::class,'create'])->name('admin.creating.blog');
         Route::post('ckeditorImage',[BlogController::class,'ckeditorImage'])->name('upload');
