@@ -33,7 +33,7 @@
                                     <td> {{ $key + 1 }} </td>
                                     <td id="postId">
                                         <a href="{{route('website.knowledge.details.post',['id' => Crypt::encryptString($item->knowledge_forum_post_id)])}}" target="_blank">
-                                            {{ $item->knowledgeForumPost->question }}                                       
+                                            {!! Illuminate\Support\Str::limit(strip_tags($item->knowledgeForumPost->question), $limit = 50, $end = '...') !!}                             
                                         </a>
                                     </td>     
                                     <td>{{ $item->report_count }}</td>
