@@ -120,9 +120,26 @@
                                 <ul class="list-inline centered">
                                     @forelse ($chapters as $key => $item)
                                         <li>
-                                            <input class="styled-checkbox item_price chapter-value"  id="styled-checkbox-{{ $key + 1 }}" data-id="{{ $item->id }}"  data-name="{{ $item->name }}" data-price="{{ $item->price }}"  type="checkbox" value="{{ $item->id }}">
+                                            
+                                            @if( ! $item->cart->isEmpty())
+                                                @if ($item->cart[0]['chapter_id'] == $item->id)
+                                                    <label><i class="fa fa-check-circle-o" style="color:green"></i></label>&nbsp;
+                                                    <label for="styled-checkbox-{{ $key + 1 }}">{{ $item->name }} -- <span style="font-size:12px;color:rgb(63, 63, 63);">Item present inside cart</span></label>
+                                                    <span class="course-price mr-2"><i class="fa fa-inr"  aria-hidden="true"></i>{{ $item->price }}</span>
+                                                @else
+                                                    <input class="styled-checkbox item_price chapter-value"  id="styled-checkbox-{{ $key + 1 }}" data-id="{{ $item->id }}"  data-name="{{ $item->name }}" data-price="{{ $item->price }}"  type="checkbox" value="{{ $item->id }}">
+                                                    <label for="styled-checkbox-{{ $key + 1 }}">{{ $item->name }}</label>
+                                                    <span class="course-price mr-2"><i class="fa fa-inr"  aria-hidden="true"></i>{{ $item->price }}</span>
+                                                @endif
+                                            @else
+                                                <input class="styled-checkbox item_price chapter-value"  id="styled-checkbox-{{ $key + 1 }}" data-id="{{ $item->id }}"  data-name="{{ $item->name }}" data-price="{{ $item->price }}"  type="checkbox" value="{{ $item->id }}">
+                                                <label for="styled-checkbox-{{ $key + 1 }}">{{ $item->name }}</label>
+                                                <span class="course-price mr-2"><i class="fa fa-inr"  aria-hidden="true"></i>{{ $item->price }}</span>
+                                            @endif
+                                            
+                                            {{-- <input class="styled-checkbox item_price chapter-value"  id="styled-checkbox-{{ $key + 1 }}" data-id="{{ $item->id }}"  data-name="{{ $item->name }}" data-price="{{ $item->price }}"  type="checkbox" value="{{ $item->id }}">
                                             <label for="styled-checkbox-{{ $key + 1 }}">{{ $item->name }}</label>
-                                            <span class="course-price mr-2"><i class="fa fa-inr"  aria-hidden="true"></i>{{ $item->price }}</span> 
+                                            <span class="course-price mr-2"><i class="fa fa-inr"  aria-hidden="true"></i>{{ $item->price }}</span>  --}}
                                         </li>
                                     @empty
                                         <li>
@@ -301,7 +318,7 @@
                                 '<i class="fa fa-inr" aria-hidden="true"></i>' + allPrice)
                             $('#add_cart').prop('disabled', true)
                             $("#add_cart").css("background-color", "grey");
-                            location.reload(true);
+                            window.location.href = "{{route('website.cart')}}";
                         });
                         chapterId = [];
                     },

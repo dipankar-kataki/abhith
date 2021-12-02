@@ -105,7 +105,7 @@ class CourseController extends Controller
         $countMultiChoice = MultipleChoice::where('subject_id', $course->subject->id)->where('is_activate', 1)->count();
         $cart = []; $order = [];
         if(Auth::check()){
-            $cart = Cart::where('user_id', Auth::user()->id )->get();
+            $cart = Cart::where('user_id', Auth::user()->id )->where('is_remove_from_cart',0)->where('is_paid',0)->get();
             $order = Order::where('user_id', Auth::user()->id )->get();
         }
 
