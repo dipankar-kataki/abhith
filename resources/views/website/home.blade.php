@@ -153,36 +153,39 @@
     <section class="upcoming-course">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-lg-12 text-center">
-                    <p class="cross-line2">
-                        <span>UPCOMING COURSES</span>
-                    </p>
+                @if (! empty($upComingCourse) )
+                    <div class="col-lg-12 text-center">
+                        <p class="cross-line2">
+                            <span>UPCOMING COURSES</span>
+                        </p>
 
-                    <h2 class="heading-black">Some of our upcoming courses</h2>
-                </div>
-                <div class="col-lg-12">
-                    <div class="owl-slider">
-                        <div id="carousel" class="owl-carousel">
-                            @foreach ($upComingCourse as $key => $item)
+                        <h2 class="heading-black">Some of our upcoming courses</h2>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="owl-slider">
+                            <div id="carousel" class="owl-carousel">
+                                @foreach ($upComingCourse as $key => $item)
 
-                                <div class="item">
-                                    <div class="upcoming-image"><img src="{{ asset($item['course_pic']) }}"
-                                            class="w100"></div>
-                                    <div class="upcoming-desc"><span class="icon-clock-09 clock-icon1"></span>
-                                        <span>{{$item['duration']}}</span>
-                                        <h4 class="small-heading-white">{{ $item['name'] }}</h4>
-                                        <span><i class="fa fa-inr" aria-hidden="true"></i>{{$item['final_price']}}</span>
+                                    <div class="item">
+                                        <div class="upcoming-image"><img src="{{ asset($item['course_pic']) }}"
+                                                class="w100"></div>
+                                        <div class="upcoming-desc"><span class="icon-clock-09 clock-icon1"></span>
+                                            <span>{{$item['duration']}}</span>
+                                            <h4 class="small-heading-white">{{ $item['name'] }}</h4>
+                                            <span><i class="fa fa-inr" aria-hidden="true"></i>{{$item['final_price']}}</span>
+                                        </div>
                                     </div>
-                                </div>
-                                @if ($key + 1 >= 5)
-                                    @break
-                                @endif
+                                    @if ($key + 1 >= 5)
+                                        @break
+                                    @endif
 
-                            @endforeach
+                                @endforeach
 
+                            </div>
                         </div>
                     </div>
-                </div>
+                @endif
+                
             </div>
         </div>
     </section>
