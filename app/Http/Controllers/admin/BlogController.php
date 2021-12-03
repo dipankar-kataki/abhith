@@ -10,10 +10,16 @@ use App\Common\BadWords;
 class BlogController extends Controller
 {
     //
-    protected function index()
+    protected function index(Request $request, $id = null)
     {
+
+        $blog_id = 0;
+        if($id != null){
+            $blog_id = \Crypt::decrypt($id);
+        }
+
         $blogs = Blog::orderBy('id','DESC')->paginate(10);
-        return view('admin.master.blog.blog', \compact('blogs'));
+        return view('admin.master.blog.blog', \compact('blogs', 'blog_id'));
     }
 
     protected function ckeditorImage(Request $request)

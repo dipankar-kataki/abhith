@@ -19,6 +19,11 @@ $subjects = Subject::where('is_activate', Activation::Activate)
                 <h4 class="card-title">Add Multiple Choice Questions</h4>
                 <form action="{{route('admin.insert.multiple.choice')}}"  method="POST">
                     @csrf
+
+                    {{-- <div class="form-group">
+                        <label for="">Enter Set Name</label>
+                        <input type="text" class="form-control" name="setName" placeholder="e.g Set A or Set B etc.">
+                    </div> --}}
                     <div class="form-group">
                         <label for="exampleSelectGender">Select Subjects</label>
                         <select class="form-control" name="subject_id" required>

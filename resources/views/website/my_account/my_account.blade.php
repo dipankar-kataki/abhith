@@ -20,6 +20,9 @@
     #purchase_history_table_filter{
         margin-top:-40px;
     }
+    #forum-search-bar{
+        display:none;
+    }
 </style>
 
 @endsection

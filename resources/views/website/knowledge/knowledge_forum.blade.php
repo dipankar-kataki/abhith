@@ -21,6 +21,9 @@
 
     <section class="knowledge-forum">
         <div class="container-fluid">
+            <div class="text-center">
+                <h2 class="heading-black mb-4">Knowledge Forum</h2>
+            </div>
             <div class="row">
                 <div class="col-lg-8">
                     <div class="knowledge-forum-left">

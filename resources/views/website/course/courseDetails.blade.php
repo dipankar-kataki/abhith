@@ -113,16 +113,40 @@
 
                             <div class=" course-desc-list1">
                                 <label class="box1 ">Full Course
-                                    <input type="checkbox" data-price="0.00" id="select-all">
+                                    <input type="checkbox" data-price="0.00" id="select-all" data-selected="fullCourse">
                                     <span class="checkmark"></span>
                                 </label>
                                 <h5 class="small-heading-black mt15 mb20">Select Lesson</h5>
                                 <ul class="list-inline centered">
                                     @forelse ($chapters as $key => $item)
                                         <li>
-                                            <input class="styled-checkbox item_price chapter-value"  id="styled-checkbox-{{ $key + 1 }}" data-id="{{ $item->id }}"  data-name="{{ $item->name }}" data-price="{{ $item->price }}"  type="checkbox" value="{{ $item->id }}">
+                                            @auth 
+                                                @if( ! $item->cart->isEmpty())
+                                                
+                                                        @if ($item->cart[0]['chapter_id'] == $item->id)
+                                                            <label><i class="fa fa-check-circle-o" style="color:green"></i></label>&nbsp;
+                                                            <label for="styled-checkbox-{{ $key + 1 }}">{{ $item->name }} <span style="font-size:12px;color:rgb(63, 63, 63);">( Item present inside cart )</span></label>
+                                                            <span class="course-price mr-2"><i class="fa fa-inr"  aria-hidden="true"></i>{{ $item->price }}</span>
+                                                        @else
+                                                            <input class="styled-checkbox item_price chapter-value"  id="styled-checkbox-{{ $key + 1 }}" data-id="{{ $item->id }}"  data-name="{{ $item->name }}" data-price="{{ $item->price }}"  type="checkbox" value="{{ $item->id }}">
+                                                            <label for="styled-checkbox-{{ $key + 1 }}">{{ $item->name }}</label>
+                                                            <span class="course-price mr-2"><i class="fa fa-inr"  aria-hidden="true"></i>{{ $item->price }}</span>
+                                                        @endif
+                                                    
+                                                @else
+                                                    <input class="styled-checkbox item_price chapter-value"  id="styled-checkbox-{{ $key + 1 }}" data-id="{{ $item->id }}"  data-name="{{ $item->name }}" data-price="{{ $item->price }}"  type="checkbox" value="{{ $item->id }}">
+                                                    <label for="styled-checkbox-{{ $key + 1 }}">{{ $item->name }}</label>
+                                                    <span class="course-price mr-2"><i class="fa fa-inr"  aria-hidden="true"></i>{{ $item->price }}</span>
+                                                @endif
+                                            @endauth
+                                            @guest
+                                                <input class="styled-checkbox item_price chapter-value"  id="styled-checkbox-{{ $key + 1 }}" data-id="{{ $item->id }}"  data-name="{{ $item->name }}" data-price="{{ $item->price }}"  type="checkbox" value="{{ $item->id }}">
+                                                <label for="styled-checkbox-{{ $key + 1 }}">{{ $item->name }}</label>
+                                                <span class="course-price mr-2"><i class="fa fa-inr"  aria-hidden="true"></i>{{ $item->price }}</span>
+                                            @endguest
+                                            {{-- <input class="styled-checkbox item_price chapter-value"  id="styled-checkbox-{{ $key + 1 }}" data-id="{{ $item->id }}"  data-name="{{ $item->name }}" data-price="{{ $item->price }}"  type="checkbox" value="{{ $item->id }}">
                                             <label for="styled-checkbox-{{ $key + 1 }}">{{ $item->name }}</label>
-                                            <span class="course-price mr-2"><i class="fa fa-inr"  aria-hidden="true"></i>{{ $item->price }}</span> 
+                                            <span class="course-price mr-2"><i class="fa fa-inr"  aria-hidden="true"></i>{{ $item->price }}</span>  --}}
                                         </li>
                                     @empty
                                         <li>
@@ -211,11 +235,13 @@
         let checkboxItem = '.item_price';
         let chapterId = [];
         let allPrice = 0.00;
+        let is_full_course_selected = '';
+
 
         $(selectAllItems).click(function() {
             allPrice = 0.00
-
             if (this.checked) {
+                is_full_course_selected =  $(this).data('selected');
                 $(checkboxItem).each(function() {
                     this.checked = true;
                     allPrice = parseFloat(allPrice) + parseFloat($(this).attr("data-price"));
@@ -227,6 +253,7 @@
             } else {
                 $(checkboxItem).each(function() {
                     this.checked = false;
+                    is_full_course_selected = '';
                     allPrice = 0.00
                     chapterId = [];
                     $('#total_price').html('<i class="fa fa-inr" aria-hidden="true"></i>' + allPrice)
@@ -240,6 +267,7 @@
 
         $(checkboxItem).change(function() {
             if (this.checked) {
+                is_full_course_selected = '';
                 allPrice = (parseFloat(allPrice) + parseFloat($(this).attr("data-price"))).toFixed(2);
                 chapterId.push($(this).data('id'));
                 $('#total_price').html('<i class="fa fa-inr" aria-hidden="true"></i>' + allPrice)
@@ -247,6 +275,7 @@
                 $("#add_cart").css("background-color", "#3ac162");
                 console.log(allPrice);
             } else {
+                is_full_course_selected = '';
                 allPrice = (parseFloat(allPrice) - parseFloat($(this).attr("data-price"))).toFixed(2);
                 let itemName = $(this).attr('data-name');
                 let indexOf = chapterId.indexOf($(this).data('id'));
@@ -280,6 +309,7 @@
                         '_token': "{{ csrf_token() }}",
                         'course_id': "{{ $course->id }}",
                         'chapter_id': chapterId,
+                        'is_full_course_selected' : is_full_course_selected,
                     },
                     success: function(result) {
                         console.log(result);
@@ -295,7 +325,7 @@
                                 '<i class="fa fa-inr" aria-hidden="true"></i>' + allPrice)
                             $('#add_cart').prop('disabled', true)
                             $("#add_cart").css("background-color", "grey");
-                            location.reload(true);
+                            window.location.href = "{{route('website.cart')}}";
                         });
                         chapterId = [];
                     },

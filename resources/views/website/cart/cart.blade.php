@@ -78,7 +78,7 @@
                         <h4 class="text-center pb-3">Cart empty !</h4>
                     @endforelse
                 </ul>
-                <div class="shipping-div text-center"><a href="{{route('website.course')}}" class="shipping-btn btn-bg-main">Continue shoping</a></div>
+                <div class="shipping-div text-center"><a href="{{route('website.course')}}" class="shipping-btn">Continue Enrolling</a></div>
                 
             </div>
             <div class="col-lg-4">
@@ -89,7 +89,7 @@
                         @if ($countPrice == 0)
                             <a href="javascript:void(0)" class="btn btn-block btn-secondary bold-600" disabled>Checkout</a>
                         @else
-                            <a href="{{route('website.checkout')}}" class="btn btn-block knowledge-link-new bold-600">Checkout</a>
+                            <button class="btn btn-block knowledge-link-new checkoutBtn" data-checkout="{{$countPrice}}">Checkout</button>
                         @endif
                     </div>
                 @endauth
@@ -123,6 +123,18 @@
                 }
             }
         });
+    });
+
+
+    $('.checkoutBtn').on('click',function(e){
+        let checkoutPrice = $(this).data('checkout');
+
+        if(checkoutPrice > 500000){
+            toastr.error('At a time user can checkout with a maximum amount of Rs 5,00,000.');
+        }else{
+            window.location.href="{{route('website.checkout')}}";
+        }
+
     });
 
 </script>

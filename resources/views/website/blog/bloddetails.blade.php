@@ -15,7 +15,7 @@
                         <nav aria-label="breadcrumb">
                             <ol class="breadcrumb">
                                 <li class="breadcrumb-item"><a href="course.html">Blog</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">{{$blog->name}}</li>
+                                {{-- <li class="breadcrumb-item active" aria-current="page">{{$blog->name}}</li> --}}
                             </ol>
                         </nav>
                         <div class="block-ellipsis3">

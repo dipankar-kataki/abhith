@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 
 class Chapter extends Model
 {
@@ -18,7 +19,11 @@ class Chapter extends Model
     }
 
     public function cart(){
-        return $this->hasMany('App\Models\Cart');
+        if(Auth::check()){
+            return $this->hasMany('App\Models\Cart','chapter_id','id')->where('user_id','=',Auth::user()->id)->where('is_paid','=',0)->where('is_remove_from_cart','=',0);
+        }else{
+            return $this->hasMany('App\Models\Cart','chapter_id','id');
+        }
     }
 
     public function order(){

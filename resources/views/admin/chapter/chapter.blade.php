@@ -18,7 +18,7 @@
                     <tbody>
                         <tr>
                             <td class="footable-first-visible" style="width: 40%; display: table-cell;"><input type="text" name="name[]" placeholder="Enter Chapter" class="form-control name_list" required></td>
-                            <td class="footable-first-visible" style="width: 40%; display: table-cell;"><input type="text" name="price[]"  placeholder="Enter Price" class="form-control name_list" pattern="\d+(\.)?(\d+)?" title="Value should be a format of price. E.g 22 or 22.9" required></td>
+                            <td class="footable-first-visible" style="width: 40%; display: table-cell;"><input type="text" name="price[]"  placeholder="Enter Price" class="form-control name_list" pattern="\d+(\.)?(\d+)?" maxlength="4" title="Value should be a format of price. E.g 22 or 22.9" required></td>
                             <td class="footable-last-visible" style="display: table-cell;"><button type="button" name="add" id="adding" class="btn btn-success" style="width: 100%;">Add More</button></td>
                         </tr>
                     </tbody>
@@ -153,8 +153,8 @@
             toastr.error('Chapter name is required');
         }else if(cPrice.length == 0){
             toastr.error('Chapter price is required');
-        }else if(cPrice >9999){
-            toastr.error('Chapter price should not be greater than 9999');
+        }else if(cPrice.length > 4){
+            toastr.error('Chapter price should not be greater than 4 digits');
         }else if(/^(\d+)(\.)?(\d+)?$/.test(cPrice) == false){
             toastr.error('Chapter price should be natural number or a decimal number');
         }else{

@@ -41,7 +41,7 @@ $course = Course::where('is_activate', Activation::Activate)->get();
 
                     <div class="form-group">
                         <label for="exampleTextarea1">Description</label>
-                        <textarea class="form-control"  name="description" rows="4" required></textarea>
+                        <textarea class="form-control" id="" name="description" maxlength="80" rows="4" required></textarea>
                         <span class="text-danger" id="description_error"></span>
                     </div>
 
