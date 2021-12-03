@@ -23,8 +23,10 @@
             color: rgb(124, 124, 124);
         }
 
-        .heading-black{
+        .heading-black1{
             color: #fff;
+            font-size: 33px;
+            font-weight: 700;
         }
 
     </style>
@@ -43,7 +45,7 @@
                                     <div class="home-slide"><img src="{{ asset($item->banner_image) }}"
                                             style="border-radius: 20px" class="w100"></div>
                                     <div class="home-desc">
-                                        <h2 class="heading-black mb-4">{!! $item->name !!}</h2>
+                                        <h2 class="heading-black1 mb-4">{!! $item->name !!}</h2>
                                         {{-- <p class="banner-para">{!! $item->description !!}</p> --}}
                                         @if ($item->course_id != null)
                                             <div><a href="{{ route('website.course.details', ['id' => \Crypt::encrypt($item->course_id)]) }}"
