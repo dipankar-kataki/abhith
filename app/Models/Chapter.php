@@ -19,7 +19,9 @@ class Chapter extends Model
     }
 
     public function cart(){
-        return $this->hasMany('App\Models\Cart','chapter_id','id')->where('user_id','=',Auth::user()->id)->where('is_paid','=',0)->where('is_remove_from_cart','=',0);
+        if(Auth::check()){
+            return $this->hasMany('App\Models\Cart','chapter_id','id')->where('user_id','=',Auth::user()->id)->where('is_paid','=',0)->where('is_remove_from_cart','=',0);
+        }
     }
 
     public function order(){
