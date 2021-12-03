@@ -3,6 +3,11 @@
 @section('title','Cart')
 
 @section('head')
+<style>
+    .bold-600{
+        font-weight: 600;
+    }
+</style>
 @endsection
 
 @section('content')
@@ -38,7 +43,7 @@
                         <div class="cart-course-image1"><img src="{{asset($item->course->course_pic)}}" style="height:50px;width:70px;"></div>
                         <div class="cart-course-desc">
                             <h6 data-brackets-id="12020">Chapter: {{$item->chapter->name}}</h6>
-                            <p>course: {{$item->course->name}}</p>
+                            <p>Course: {{$item->course->name}}</p>
                             {{-- <div class="dropdown course-tooltip">
                                 <button class="dropbtn">Course Item Details<span><i class="fa fa-info-circle ml5" aria-hidden="true"></i></span></button>
                                 <div class="dropdown-content box arrow-top">
@@ -68,12 +73,12 @@
             <div class="col-lg-4">
                 @auth   
                     <div class="cart-checkout">
-                        <label>Total:</label>
+                        <label class="bold-600">Total:</label>
                         <h2 class="heading-black mb20"><i class="fa fa-inr" aria-hidden="true"></i>{{ $countPrice}}</h2>
                         @if ($countPrice == 0)
-                            <a href="javascript:void(0)" class="btn btn-block btn-secondary" disabled>Checkout</a>
+                            <a href="javascript:void(0)" class="btn btn-block btn-secondary bold-600" disabled>Checkout</a>
                         @else
-                            <a href="{{route('website.checkout')}}" class="btn btn-block knowledge-link-new">Checkout</a>
+                            <a href="{{route('website.checkout')}}" class="btn btn-block knowledge-link-new bold-600">Checkout</a>
                         @endif
                     </div>
                 @endauth
