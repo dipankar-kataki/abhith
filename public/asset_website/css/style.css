@@ -3198,10 +3198,10 @@ input {
     padding: 40px 50px;
     border-radius: 20px;position: relative;}
 
-.edit-btn{
+/* .edit-btn{
     background-color: #fdfdfd;
     box-shadow: 0 5px 10px #f5f3f3;
-}
+} */
 
 ::placeholder{
     color:aliceblue;
