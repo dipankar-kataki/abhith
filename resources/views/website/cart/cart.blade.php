@@ -73,7 +73,7 @@
                         @if ($countPrice == 0)
                             <a href="javascript:void(0)" class="btn btn-block btn-secondary" disabled>Checkout</a>
                         @else
-                            <a href="{{route('website.checkout')}}" class="btn btn-block knowledge-link-new">Checkout</a>
+                            <button class="btn btn-block knowledge-link-new checkoutBtn" data-checkout="{{$countPrice}}">Checkout</button>
                         @endif
                     </div>
                 @endauth
@@ -107,6 +107,18 @@
                 }
             }
         });
+    });
+
+
+    $('.checkoutBtn').on('click',function(e){
+        let checkoutPrice = $(this).data('checkout');
+
+        if(checkoutPrice > 500000){
+            toastr.error('At a time user can checkout with a maximum amount of Rs 5,00,000.');
+        }else{
+            window.location.href="{{route('website.checkout')}}";
+        }
+
     });
 
 </script>
