@@ -130,3 +130,6 @@ Route::view('website/new-password','website.auth.newpassword')->name('website.ne
 Route::view('admin/course/view','admin.course.view')->name('admin.course.view');
 
 
+Route::get('cache-clear',function(){
+    Artisan::call('optimize:clear');
+});
