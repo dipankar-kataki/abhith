@@ -24,7 +24,7 @@
                 <h5 class="small-heading-black">Contact us</h5>
                 <p class="mb0">Latasil, Uzan Bazar, Guwahati,<br />
                     Assam 781001</p>
-                <p class="mb0">example@gmail.com</p>
+                <p class="mb0">new-example@gmail.com</p>
             </div>
             <div class="col-lg-4 footer-second p0">
                 <h5 class="small-heading-black">Quick Links</h5>
