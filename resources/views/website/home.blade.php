@@ -29,6 +29,10 @@
             font-weight: 700;
         }
 
+        .owl-carousel .owl-stage-outer{
+            border-radius: 20px;
+        }
+
     </style>
 @endsection
 
