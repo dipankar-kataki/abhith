@@ -27,46 +27,52 @@ class PaymentController extends Controller
             }
         }
         $total_amount = array_sum($price);
-        $user_detail = UserDetails::where('user_id', Auth::user()->id)->first();
-
-        /**********************  For Razorpay  *************************/
-        $api = new Api(env('RAZORPAY_KEY'), env('RAZORPAY_SECRET'));
-        $orderData = [
-            'receipt'         => now()->timestamp,
-            'amount'          => $total_amount * 100, // 39900 rupees in paise
-            'currency'        => 'INR'
-        ];
         
-        $razorpayOrder = $api->order->create($orderData);
+        if($total_amount == 0){
+            return redirect()->route('website.dashboard');
+        }else{
+            $user_detail = UserDetails::where('user_id', Auth::user()->id)->first();
 
-        $checkout_params = [
-            "key"               => env('RAZORPAY_KEY'),
-            "amount"            => ($total_amount * 100),
-            "name"              => "Abhith Shiksha",
-            "image"             => "https://cdn.razorpay.com/logos/FFATTsJeURNMxx_medium.png",
-            "prefill"           => [
-            "name"              => Auth::user()->name . Auth::user()->lastname,
-            "email"             => Auth::user()->email,
-            "contact"           => $user_detail->phone,
-            ],
-            "theme"             => [
-            "color"             => "#528FF0"
-            ],
-            "order_id"          =>  $razorpayOrder['id'],
-        ];
+            /**********************  For Razorpay  *************************/
+            $api = new Api(env('RAZORPAY_KEY'), env('RAZORPAY_SECRET'));
+            $orderData = [
+                'receipt'         => now()->timestamp,
+                'amount'          => $total_amount * 100, // 39900 rupees in paise
+                'currency'        => 'INR'
+            ];
+        
+            $razorpayOrder = $api->order->create($orderData);
 
-        foreach($cart as $item){
-            Order::create([
-                'user_id' => Auth::user()->id,
-                'chapter_id' => $item->chapter_id,
-                'course_id' => $item->course_id,
-                'rzp_order_id' => $razorpayOrder['id'],
-                'payment_status' => 'pending',
-            ]);
+            $checkout_params = [
+                "key"               => env('RAZORPAY_KEY'),
+                "amount"            => ($total_amount * 100),
+                "name"              => "Abhith Shiksha",
+                "image"             => "https://cdn.razorpay.com/logos/FFATTsJeURNMxx_medium.png",
+                "prefill"           => [
+                "name"              => Auth::user()->name . Auth::user()->lastname,
+                "email"             => Auth::user()->email,
+                "contact"           => $user_detail->phone,
+                ],
+                "theme"             => [
+                "color"             => "#528FF0"
+                ],
+                "order_id"          =>  $razorpayOrder['id'],
+            ];
+
+            foreach($cart as $item){
+                Order::create([
+                    'user_id' => Auth::user()->id,
+                    'chapter_id' => $item->chapter_id,
+                    'course_id' => $item->course_id,
+                    'rzp_order_id' => $razorpayOrder['id'],
+                    'payment_status' => 'pending',
+                ]);
+            }
+            
+
+            return view('website.cart.checkout')->with(['cart' => $cart, 'countCartItem' => $countCartItem, 'countPrice' => $total_amount, 'checkoutParam' => $checkout_params]);
         }
         
-
-        return view('website.cart.checkout')->with(['cart' => $cart, 'countCartItem' => $countCartItem, 'countPrice' => $total_amount, 'checkoutParam' => $checkout_params]);;
     }
 
 
