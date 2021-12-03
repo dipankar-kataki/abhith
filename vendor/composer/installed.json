@@ -333,6 +333,10 @@
                 }
             ],
             "description": "PHP library to block bad words in a string",
+            "support": {
+                "issues": "https://github.com/ConsoleTVs/Profanity/issues",
+                "source": "https://github.com/ConsoleTVs/Profanity/tree/3.1.0"
+            },
             "install-path": "../consoletvs/profanity"
         },
         {
@@ -768,6 +772,10 @@
                 "uppercase",
                 "words"
             ],
+            "support": {
+                "issues": "https://github.com/doctrine/inflector/issues",
+                "source": "https://github.com/doctrine/inflector/tree/2.0.4"
+            },
             "funding": [
                 {
                     "url": "https://www.doctrine-project.org/sponsorship.html",
@@ -2712,6 +2720,10 @@
                 "debug",
                 "debugbar"
             ],
+            "support": {
+                "issues": "https://github.com/maximebf/php-debugbar/issues",
+                "source": "https://github.com/maximebf/php-debugbar/tree/v1.17.3"
+            },
             "install-path": "../maximebf/debugbar"
         },
         {
@@ -3494,6 +3506,10 @@
                 }
             ],
             "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
+            "support": {
+                "issues": "https://github.com/phpDocumentor/ReflectionDocBlock/issues",
+                "source": "https://github.com/phpDocumentor/ReflectionDocBlock/tree/5.3.0"
+            },
             "install-path": "../phpdocumentor/reflection-docblock"
         },
         {
@@ -6086,6 +6102,7 @@
                     "type": "tidelift"
                 }
             ],
+            "abandoned": "symfony/mailer",
             "install-path": "../swiftmailer/swiftmailer"
         },
         {
