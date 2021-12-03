@@ -29,7 +29,7 @@
                                 
                                 </li>
                             @empty
-                                <h4>Cart empty !</h4>
+                                <h4 class="text-center">Cart empty !</h4>
                             @endforelse
                         </ul>
                     </div>

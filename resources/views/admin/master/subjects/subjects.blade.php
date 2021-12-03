@@ -52,7 +52,7 @@
                                     @endif
                                 </td>
                                 <td>
-                                    <a href="{{route('admin.edit.subject',['id'=>\Crypt::encrypt($item->id)])}}"  class="btn btn-gradient-primary btn-rounded btn-icon anchor_rounded">
+                                    <a href="{{route('admin.edit.subject',['id'=>\Crypt::encrypt($item->id)])}}" data-toggle="tooltip" data-placement="top" title="Edit"  class="btn btn-gradient-primary btn-rounded btn-icon anchor_rounded">
                                         <i class="mdi mdi-pencil-outline"></i>
                                     </a>
                                 </td>

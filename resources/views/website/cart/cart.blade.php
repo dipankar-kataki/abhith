@@ -75,7 +75,7 @@
                         </div>
                     </li>
                     @empty
-                        <h4>Cart empty !</h4>
+                        <h4 class="text-center pb-3">Cart empty !</h4>
                     @endforelse
                 </ul>
                 <div class="shipping-div text-center"><a href="{{route('website.course')}}" class="shipping-btn btn-bg-main">Continue shoping</a></div>
