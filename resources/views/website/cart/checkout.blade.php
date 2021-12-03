@@ -3,6 +3,11 @@
 @section('title', 'Checkout')
 
 @section('head')
+<style>
+    .bold-600{
+        font-weight: 600;
+    }
+</style>
 @endsection
 
 @section('content')
@@ -18,7 +23,7 @@
                                     <div class="cart-course-image1"><img src="{{asset($item->course->course_pic)}}" style="height:50px;width:70px;"></div>
                                     <div class="cart-course-desc">
                                         <h6 data-brackets-id="12020">Chapter: {{$item->chapter->name}}</h6>
-                                        <p>course: {{$item->course->name}}</p>
+                                        <p>Course: {{$item->course->name}}</p>
                                         <span class="course-price2" id="itemPrice"><i class="fa fa-inr" aria-hidden="true"></i>{{$item->chapter->price}}</span>
                                     </div>
                                 
@@ -35,7 +40,7 @@
                     </div>
                 </div>
                 <div class="col-md-5" style="border-left:2px solid #ddd;">
-                    <button id="rzp-button1" class="btn btn-lg btn-success">Pay &nbsp; <i class="fa fa-inr" aria-hidden="true"></i>  {{$countPrice}}</span></button>
+                    <button id="rzp-button1" class="btn btn-lg btn-success bold-600">Pay &nbsp; <i class="fa fa-inr" aria-hidden="true"></i>  {{$countPrice}}</span></button>
                     <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
                     <form name='razorpayform' action="{{route('payment.verify')}}" method="POST">
                         @csrf

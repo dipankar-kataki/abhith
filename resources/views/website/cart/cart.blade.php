@@ -7,6 +7,17 @@
     .bold-600{
         font-weight: 600;
     }
+
+    .btn-bg-main{
+        background-image: linear-gradient(to left, #076fef, #01b9f1);
+        border: none;
+        color: #fff
+    }
+    
+    .shipping-btn:hover{
+        background: #111;
+        color: #fff;
+    }
 </style>
 @endsection
 
@@ -67,7 +78,7 @@
                         <h4>Cart empty !</h4>
                     @endforelse
                 </ul>
-                <div class="shipping-div text-center"><a href="{{route('website.course')}}" class="shipping-btn">Continue shoping</a></div>
+                <div class="shipping-div text-center"><a href="{{route('website.course')}}" class="shipping-btn btn-bg-main">Continue shoping</a></div>
                 
             </div>
             <div class="col-lg-4">

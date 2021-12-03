@@ -3,27 +3,51 @@
 @section('title', 'Home')
 
 @section('head')
+    <style>
+        .home-slide::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            border-radius: 20px;
+            background: rgba(1, 1, 1, 0.3)
+        }
 
+        .btn-outline-white{
+            border: 1px solid #fff;
+            color: #fff;
+        }        
+        
+        .btn-outline-white:hover{
+            color: rgb(124, 124, 124);
+        }
+
+        .heading-black{
+            color: #fff;
+        }
+
+    </style>
 @endsection
 
 @section('content')
 
-    <section class="home-banner">
+    <section class="home-banner" style="border-radius: 20px">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12 p0">
                     <div class="owl-slider">
                         <div id="carousel-banner" class="owl-carousel" style="border-radius: 20px">
                             @foreach ($banner as $item)
-                                <div class="item">
+                                <div class="item" style="border-radius: 20px">
                                     <div class="home-slide"><img src="{{ asset($item->banner_image) }}"
                                             style="border-radius: 20px" class="w100"></div>
                                     <div class="home-desc">
-                                        <h2 class="heading-black">{!! $item->name !!}</h2>
-                                        <p class="banner-para">{!! $item->description !!}</p>
+                                        <h2 class="heading-black mb-4">{!! $item->name !!}</h2>
+                                        {{-- <p class="banner-para">{!! $item->description !!}</p> --}}
                                         @if ($item->course_id != null)
                                             <div><a href="{{ route('website.course.details', ['id' => \Crypt::encrypt($item->course_id)]) }}"
-                                                    target="_blank" class="about-view">View More</a></div>
+                                                    target="_blank" class="btn btn-outline-white">View More</a></div>
                                         @endif
                                     </div>
                                 </div>
@@ -71,7 +95,7 @@
                             <p>Lorem ipsum dolor sit amet adipisicing elit, sed do eiusmod tempor</p>
                         </li>
                     </ul>
-                    <div><a href="{{route('website.about')}}" target="_blank" class="about-view">View More</a></div>
+                    <div><a href="{{ route('website.about') }}" target="_blank" class="about-view">View More</a></div>
                 </div>
                 <div class="col-lg-5 about-right">
                     <div class="enquiry-form">
@@ -114,8 +138,9 @@
                                 selection of courses</h2>
                             <p>Choose from over 100,000 online video courses with
                                 new additions published every month</p>
-                            <div class="mt-5"><a href="{{route('website.course')}}" target="_blank" class="knowledge-link">View All
-                                Coures</a></div>
+                            <div class="mt-5"><a href="{{ route('website.course') }}" target="_blank"
+                                    class="knowledge-link">View All
+                                    Coures</a></div>
                         </li>
 
                         @foreach ($publishCourse as $key => $item)
@@ -123,15 +148,17 @@
 
                                 <div class="course-pic"><img src="{{ asset($item['course_pic']) }}"
                                         class="w100"></div>
-                                <div class="course-desc"><span class="icon-clock-09 clock-icon"></span><span>{{$item['duration']}}</span>
+                                <div class="course-desc"><span
+                                        class="icon-clock-09 clock-icon"></span><span>{{ $item['duration'] }}</span>
                                     <h4 class="small-heading-black">{{ $item['name'] }}</h4>
-                                    <span><i class="fa fa-inr" aria-hidden="true"></i>{{$item['final_price']}}</span>
-                                    <a href="{{route('website.course.details',['id'=>\Crypt::encrypt($item['id'])])}}" class="enroll" target="_blank">Enroll Now</a>
+                                    <span><i class="fa fa-inr" aria-hidden="true"></i>{{ $item['final_price'] }}</span>
+                                    <a href="{{ route('website.course.details', ['id' => \Crypt::encrypt($item['id'])]) }}"
+                                        class="enroll" target="_blank">Enroll Now</a>
                                 </div>
                             </li>
                             @if ($key + 1 >= 5)
-                                @break
-                            @endif
+                            @break
+                        @endif
                         @endforeach
 
                         {{-- <li>
@@ -169,14 +196,15 @@
                                     <div class="upcoming-image"><img src="{{ asset($item['course_pic']) }}"
                                             class="w100"></div>
                                     <div class="upcoming-desc"><span class="icon-clock-09 clock-icon1"></span>
-                                        <span>{{$item['duration']}}</span>
+                                        <span>{{ $item['duration'] }}</span>
                                         <h4 class="small-heading-white">{{ $item['name'] }}</h4>
-                                        <span><i class="fa fa-inr" aria-hidden="true"></i>{{$item['final_price']}}</span>
+                                        <span><i class="fa fa-inr"
+                                                aria-hidden="true"></i>{{ $item['final_price'] }}</span>
                                     </div>
                                 </div>
                                 @if ($key + 1 >= 5)
-                                    @break
-                                @endif
+                                @break
+                            @endif
 
                             @endforeach
 
@@ -219,62 +247,71 @@
                         <div id="carousel-testimonial" class="owl-carousel">
                             <div class="item">
                                 <div class="">
-                                <div class=" testimonial-image"><img
-                                        src="{{ asset('asset_website/img/home/user.jpg ') }}" class="w100"></div>
-                                <div class="testimonial-desc">
-                                    <h5>Rajdeep Das</h5>
-                                    <p>MSC students</p>
+                                    <div class=" testimonial-image"><img
+                                            src="{{ asset('asset_website/img/home/user.jpg ') }}" class="w100">
+                                    </div>
+                                    <div class="testimonial-desc">
+                                        <h5>Rajdeep Das</h5>
+                                        <p>MSC students</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                                        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                                        irure
+                                        dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                                        pariatur.
+                                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                                        mollit anim id est laborum</p>
                                 </div>
                             </div>
-                            <div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                                    dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                                    mollit anim id est laborum</p>
+                            <div class="item">
+                                <div class="">
+                                    <div class=" testimonial-image"><img
+                                            src="{{ asset('asset_website/img/home/user.jpg') }}" class="w100">
+                                    </div>
+                                    <div class="testimonial-desc">
+                                        <h5>Rajdeep Das</h5>
+                                        <p>MSC students</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                                        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                                        irure
+                                        dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                                        pariatur.
+                                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                                        mollit anim id est laborum</p>
+                                </div>
                             </div>
-                        </div>
-                        <div class="item">
-                            <div class="">
-                                <div class=" testimonial-image"><img
-                                    src="{{ asset('asset_website/img/home/user.jpg') }}" class="w100"></div>
-                            <div class="testimonial-desc">
-                                <h5>Rajdeep Das</h5>
-                                <p>MSC students</p>
+                            <div class="item">
+                                <div>
+                                    <div class="testimonial-image"><img
+                                            src="{{ asset('asset_website/img/home/user.jpg') }}" class="w100">
+                                    </div>
+                                    <div class="testimonial-desc">
+                                        <h5>Rajdeep Das</h5>
+                                        <p>MSC students</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                                        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+                                        irure
+                                        dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                                        pariatur.
+                                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+                                        mollit anim id est laborum</p>
+                                </div>
                             </div>
-                        </div>
-                        <div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                                dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                                mollit anim id est laborum</p>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div>
-                            <div class="testimonial-image"><img src="{{ asset('asset_website/img/home/user.jpg') }}"
-                                    class="w100"></div>
-                            <div class="testimonial-desc">
-                                <h5>Rajdeep Das</h5>
-                                <p>MSC students</p>
-                            </div>
-                        </div>
-                        <div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                                dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-                                mollit anim id est laborum</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        </div>
         </div>
     </section>
 
@@ -362,7 +399,7 @@
 
     <script>
         jQuery("#carousel").owlCarousel({
-            loop:true,
+            loop: true,
             autoplay: true,
             rewind: true,
             /* use rewind if you don't want loop */
@@ -392,7 +429,7 @@
         });
 
         jQuery("#carousel-testimonial").owlCarousel({
-            loop:true,
+            loop: true,
             autoplay: true,
             rewind: true,
             /* use rewind if you don't want loop */
@@ -422,7 +459,7 @@
         });
 
         jQuery("#carousel-banner").owlCarousel({
-            loop:true,
+            loop: true,
             autoplay: true,
             rewind: true,
             /* use rewind if you don't want loop */
