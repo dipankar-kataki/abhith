@@ -33,7 +33,7 @@
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <div class="table-responsive">
+                <div class="table-responsive" style="overflow-x: auto;">
                     <table id="enrolled_students_table" class="table table-bordered">
                         <thead>
                             <tr>
