@@ -20,10 +20,17 @@ $subjects = Subject::where('is_activate', Activation::Activate)
                 <form action="{{route('admin.insert.multiple.choice')}}"  method="POST">
                     @csrf
 
-                    {{-- <div class="form-group">
+                    <div class="form-group">
                         <label for="">Enter Set Name</label>
-                        <input type="text" class="form-control" name="setName" placeholder="e.g Set A or Set B etc.">
-                    </div> --}}
+                        <select name="setName" id="setName" class="form-control">
+                            <option value="" selected disabled>-- select --</option>
+                            <option value="A"> Set A </option>
+                            <option value="B"> Set B </option>
+                            <option value="C"> Set C </option>
+                            <option value="D"> Set D </option>
+                            <option value="E"> Set E </option>
+                        </select>
+                    </div>
                     <div class="form-group">
                         <label for="exampleSelectGender">Select Subjects</label>
                         <select class="form-control" name="subject_id" required>
@@ -92,7 +99,7 @@ $subjects = Subject::where('is_activate', Activation::Activate)
                             <div class="col-md-10">
                                 <div class="form-group">
                                     <label for="exampleInputName1">Question</label>
-                                    <input type="text" class="form-control" name="question[]" placeholder="e.g what is the unit of temperature ?">
+                                    <input type="text" class="form-control" name="question[]" placeholder="e.g what is the unit of temperature ?" required>
                                 </div>
                             </div>
                             <div class="col-md-2">
@@ -103,25 +110,25 @@ $subjects = Subject::where('is_activate', Activation::Activate)
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="exampleInputName1">Option 1</label>
-                                    <input type="text" class="form-control" name="option1[]" placeholder="e.g Celcius">
+                                    <input type="text" class="form-control" name="option1[]" placeholder="e.g Celcius" required>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="exampleInputName1">Option 2</label>
-                                    <input type="text" class="form-control" name="option2[]" placeholder="e.g Hertz">
+                                    <input type="text" class="form-control" name="option2[]" placeholder="e.g Hertz" required>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="exampleInputName1">Option 3</label>
-                                    <input type="text" class="form-control" name="option3[]" placeholder="e.g Pascal">
+                                    <input type="text" class="form-control" name="option3[]" placeholder="e.g Pascal" required>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="exampleInputName1">Option 4</label>
-                                    <input type="text" class="form-control" name="option4[]" placeholder="e.g Kelvin">
+                                    <input type="text" class="form-control" name="option4[]" placeholder="e.g Kelvin" required>
                                 </div>
                             </div>
                         </div>
