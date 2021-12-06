@@ -76,7 +76,7 @@
                                     @endif
 
                                     <a href="{{ route('admin.edit.blog',['id'=>\Crypt::encrypt($item->id)]) }}"
-                                        class="btn btn-gradient-primary btn-rounded btn-icon anchor_rounded float-right mb-3">
+                                        class="btn btn-gradient-primary btn-rounded btn-icon anchor_rounded float-right mb-3" data-toggle="tooltip" data-placement="top" title="Edit">
                                         <i class="mdi mdi-pencil-outline"></i>
                                     </a>
                                 </div>
